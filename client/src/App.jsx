@@ -1,121 +1,125 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { lazy } from "react";
+import { createBrowserRouter } from "react-router";
+// Layouts
+import Main from "./layouts/Main";
+import User from "./layouts/User";
+import Admin from "./layouts/Admin";
+// Components
+import Loader from "./components/Loader";
+// Pages
+const Home = lazy(() => import("./pages/Home"));
+const Products = lazy(() => import("./pages/Products"));
+const Detail = lazy(() => import("./pages/Detail"));
+const Acceso = lazy(() => import("./pages/Acceso"));
+const Register = lazy(() => import("./pages/Register"));
+const Cart = lazy(() => import("./pages/Cart"));
+const Profile = lazy(() => import("./pages/Profile"));
+const Orders = lazy(() => import("./pages/Orders"));
+const Checkout = lazy(() => import("./pages/Checkout"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+export const App = createBrowserRouter([
+  {
+    path: "/",
+    element: <Main />,
+    children: [
+      {
+        index: true,
+        element: (
+          <Loader>
+            <Home />
+          </Loader>
+        ),
+        loader: async () => {},
+      },
+      {
+        path: "productos",
+        element: (
+          <Loader>
+            <Products />
+          </Loader>
+        ),
+        loader: async () => {},
+        children: [
+          {
+            path: ":id",
+            element: (
+              <Loader>
+                <Detail />
+              </Loader>
+            ),
+            loader: async ({ params }) => {},
+          },
+        ],
+      },
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
-}
-
-export default App
+      {
+        path: "acceso",
+        element: (
+          <Loader>
+            <Acceso />
+          </Loader>
+        ),
+      },
+      {
+        path: "registro",
+        element: (
+          <Loader>
+            <Register />
+          </Loader>
+        ),
+      },
+      {
+        path: "carrito",
+        element: (
+          <Loader>
+            <Cart />
+          </Loader>
+        ),
+      },
+      {
+        path: "usuario",
+        element: <User />,
+        children: [
+          {
+            index: true,
+            element: (
+              <Loader>
+                <Profile />
+              </Loader>
+            ),
+          },
+          {
+            path: "compras",
+            element: (
+              <Loader>
+                <Orders />
+              </Loader>
+            ),
+          },
+          {
+            path: "checkout",
+            element: (
+              <Loader>
+                <Checkout />
+              </Loader>
+            ),
+          },
+        ],
+      },
+      {
+        path: "panel",
+        element: <Admin />,
+        children: [
+          {
+            index: true,
+            element: (
+              <Loader>
+                <Dashboard />
+              </Loader>
+            ),
+          },
+        ],
+      },
+    ],
+  },
+]);
