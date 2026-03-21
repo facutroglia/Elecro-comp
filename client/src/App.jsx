@@ -8,7 +8,10 @@ import Admin from "./layouts/Admin";
 import Loader from "./components/Loader";
 // Pages
 const Home = lazy(() => import("./pages/Home"));
+const Contacto = lazy(() => import("./pages/Contacto"));
+const Nosotros = lazy(() => import("./pages/AboutUs"));
 const Products = lazy(() => import("./pages/Products"));
+const Category = lazy(() => import("./pages/Category"));
 const Detail = lazy(() => import("./pages/Detail"));
 const Acceso = lazy(() => import("./pages/Acceso"));
 const Register = lazy(() => import("./pages/Register"));
@@ -32,6 +35,24 @@ export const App = createBrowserRouter([
         loader: async () => {},
       },
       {
+        path: "contacto",
+        element: (
+          <Loader>
+            <Contacto />
+          </Loader>
+        ),
+        loader: async () => {},
+      },
+      {
+        path: "nosotros",
+        element: (
+          <Loader>
+            <Nosotros />
+          </Loader>
+        ),
+        loader: async () => {},
+      },
+      {
         path: "productos",
         element: (
           <Loader>
@@ -40,6 +61,15 @@ export const App = createBrowserRouter([
         ),
         loader: async () => {},
         children: [
+          {
+            path: ":categoria",
+            element: (
+              <Loader>
+                <Category />
+              </Loader>
+            ),
+            loader: async ({ params }) => {},
+          },
           {
             path: ":id",
             element: (

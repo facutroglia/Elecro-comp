@@ -1,0 +1,35 @@
+#NavCategory {
+  width: 100%;
+  height: 7dvh;
+  display: flex;
+  align-items: center;
+  background-color: var(--primary);
+}
+#Category {
+  background: none;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: var(--white);
+  cursor: pointer;
+  svg {
+    color: var(--white);
+    fill: var(--white);
+    stroke: var(--white);
+  }
+}
+#SvgCategory {
+  font-size: 1.5rem;
+  svg {
+    color: var(--white);
+    fill: var(--white);
+    stroke: var(--white);
+  }
+}
+#MenuSeccion {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
