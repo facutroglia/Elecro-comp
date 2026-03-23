@@ -1,0 +1,38 @@
+#HeroContainer {
+  background-image:
+    linear-gradient(rgba(16, 16, 16, 0.9), rgba(24, 12, 52, 0.7)),
+    url(/BackgroundHero.png);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  height: 83dvh;
+}
+h1 {
+  font-size: 50px;
+  text-align: center;
+}
+#PHero {
+  font-size: 20px;
+  text-align: center;
+}
+
+#BtnVerMas {
+  padding: 0.5rem;
+  border-radius: 12px;
+  background-color: var(--primary);
+  color: var(--white);
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.5s ease;
+}
+#BtnVerMas:hover {
+  background-color: var(--secondary);
+  border: solid 1px var(--primary);
+  transition: all 0.4s ease;
+  box-shadow: 0 0 15px rgba(164, 118, 252, 0.6);
+}

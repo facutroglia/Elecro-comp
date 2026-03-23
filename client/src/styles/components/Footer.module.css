@@ -11,6 +11,7 @@ footer {
   gap: 0.5rem;
   flex-wrap: wrap;
 }
+
 .SocialSeccion {
   display: flex;
   flex-direction: column;
@@ -18,12 +19,14 @@ footer {
   height: 30dvh;
   flex: 3;
   padding-bottom: 0.5rem;
+  gap: 0.5rem;
 }
 .BrandFooter {
   justify-content: center;
   display: flex;
   height: 100%;
 }
+
 .SocialMedia {
   display: flex;
   gap: 1rem;
@@ -48,7 +51,7 @@ footer {
 }
 .FooterLinks p:hover {
   color: var(--secondary);
-  transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease;
 }
 .ContactInfo {
   display: flex;
@@ -65,5 +68,22 @@ small {
   padding: 0.8rem;
   font-weight: 600;
   font-size: 0.9rem;
-  color: var(--secondary);
+  color: var(--primary);
+}
+
+@media (max-width: 768px) {
+  #FooterContainer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .BrandFooter svg {
+    width: 80px;
+    height: auto;
+  }
+
+  .FooterLinks,
+  .ContactInfo {
+    margin: 1.25rem;
+  }
 }
