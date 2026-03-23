@@ -3,6 +3,7 @@ import { Outlet, useLocation } from "react-router";
 import Loader from "../components/Loader";
 import Topbar from "../components/Topbar";
 import CategoryNav from "../components/CategoryNav";
+import Footer from "../components/Footer";
 const Main = () => {
   const { pathname } = useLocation();
   useEffect(() => {
@@ -19,7 +20,7 @@ const Main = () => {
       <Loader>
         <Outlet />
       </Loader>
-      {/* <Footer/> */}
+      <Footer />
     </Fragment>
   );
 };

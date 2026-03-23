@@ -24,6 +24,7 @@ const Search = ({ ...props }) => {
   return (
     <form onSubmit={handleSearch} method="get" {...props}>
       <input
+        placeholder="Buscar producto"
         type="text"
         ref={input}
         onChange={() => setText(input.current.value)}

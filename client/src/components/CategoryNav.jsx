@@ -18,9 +18,15 @@ const CategoryNav = () => {
       )}
 
       <nav id={styles.MenuSeccion}>
-        <NavLink to={"/productos"}>Productos</NavLink>
-        <NavLink to={"/contacto"}>Contacto</NavLink>
-        <NavLink to={"/nosotros"}>Sobre nosotros</NavLink>
+        <NavLink to={"/productos"} className={styles.linkReset}>
+          Productos
+        </NavLink>
+        <NavLink to={"/contacto"} className={styles.linkReset}>
+          Contacto
+        </NavLink>
+        <NavLink to={"/nosotros"} className={styles.linkReset}>
+          Sobre nosotros
+        </NavLink>
       </nav>
     </header>
   );
