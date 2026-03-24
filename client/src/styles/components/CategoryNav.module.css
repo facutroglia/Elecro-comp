@@ -7,22 +7,6 @@
   position: relative;
 }
 
-#Category {
-  gap: 0.25rem;
-  padding: 2rem;
-  background: none;
-  display: flex;
-  align-items: center;
-  font-size: 1rem;
-  color: var(--white);
-  cursor: pointer;
-
-  svg {
-    color: var(--white);
-    fill: var(--white);
-    stroke: var(--white);
-  }
-}
 #SvgCategory {
   font-size: 1.5rem;
   svg {
@@ -88,4 +72,37 @@
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex: 1;
+  @media (min-width: 768px) {
+    flex: inherit;
+  }
+  & .btns {
+    gap: 0.25rem;
+    background: none;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    color: var(--white);
+    cursor: pointer;
+    flex: 1;
+    svg {
+      color: var(--white);
+      fill: var(--white);
+      stroke: var(--white);
+    }
+    &.category {
+      padding: 1rem;
+      justify-content: flex-start;
+    }
+    &.menu {
+      padding: 1rem;
+      justify-content: flex-end;
+    }
+  }
 }

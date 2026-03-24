@@ -9,8 +9,9 @@ const Search = ({ ...props }) => {
 
   const handleSearch = (e) => {
     e.preventDefault();
+    if (text.trim().length < 3) return;
     let url = "/productos";
-    let query = new URLSearchParams({ q: text });
+    let query = new URLSearchParams({ q: text, p: 1 });
     return navigate(`${url}?${query.toString()}`);
   };
 

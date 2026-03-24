@@ -1,7 +1,6 @@
 #HeroContainer {
   background-image:
-    linear-gradient(rgba(16, 16, 16, 0.9), rgba(24, 12, 52, 0.7)),
-    url(/BackgroundHero.png);
+    linear-gradient(var(--soft-04), var(--soft-03)), url(/BackgroundHero.png);
   background-size: cover;
   background-position: center;
   display: flex;
@@ -29,10 +28,13 @@ h1 {
   font-size: 15px;
   font-weight: 500;
   transition: all 0.5s ease;
+  cursor: pointer;
+  text-decoration: none;
+  border: solid 0.1rem transparent;
 }
 #BtnVerMas:hover {
   background-color: var(--secondary);
-  border: solid 1px var(--primary);
+  border-color: var(--primary);
   transition: all 0.4s ease;
   box-shadow: 0 0 15px rgba(164, 118, 252, 0.6);
 }

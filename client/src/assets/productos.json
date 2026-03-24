@@ -1,0 +1,164 @@
+{
+  "Productos": [
+    {
+      "id": 1,
+      "name": "RTX 4060 8GB",
+      "precio": 450000,
+      "categoria": "gpu",
+      "destacados": true,
+      "image": "/rtx4060.jpg"
+    },
+    {
+      "id": 2,
+      "name": "RTX 4070 12GB",
+      "precio": 680000,
+      "categoria": "gpu",
+      "destacados": false,
+      "image": "/RTX407012GB.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Ryzen 5 5600X",
+      "precio": 220000,
+      "categoria": "cpu",
+      "destacados": false,
+      "image": "/Ryzen55600X.png"
+    },
+    {
+      "id": 4,
+      "name": "Ryzen 7 5800X",
+      "precio": 310000,
+      "categoria": "cpu",
+      "destacados": false,
+      "image": "/Ryzen75800X.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Intel Core i5 12400F",
+      "precio": 240000,
+      "categoria": "cpu",
+      "destacados": false,
+      "image": "/IntelCorei512400F.webp"
+    },
+    {
+      "id": 6,
+      "name": "Motherboard B550",
+      "precio": 160000,
+      "categoria": "motherboard",
+      "destacados": true,
+      "image": "/MotherboardB550.webp"
+    },
+    {
+      "id": 7,
+      "name": "Motherboard B660",
+      "precio": 175000,
+      "categoria": "motherboard",
+      "destacados": true,
+      "image": "/MotherboardB660.jpg"
+    },
+    {
+      "id": 8,
+      "name": "RAM 16GB DDR4 3200MHz",
+      "precio": 90000,
+      "categoria": "ram",
+      "destacados": false,
+      "image": "/RAM16GBDDR43200MHz.png"
+    },
+    {
+      "id": 9,
+      "name": "RAM 32GB DDR4 3200MHz",
+      "precio": 165000,
+      "categoria": "ram",
+      "destacados": false,
+      "image": "/RAM32GBDDR43200MHz.jpeg"
+    },
+    {
+      "id": 10,
+      "name": "SSD NVMe 1TB",
+      "precio": 120000,
+      "categoria": "storage",
+      "destacados": true,
+      "image": "/SSDNVMe1TB.jpg"
+    },
+    {
+      "id": 11,
+      "name": "SSD NVMe 2TB",
+      "precio": 210000,
+      "categoria": "storage",
+      "destacados": false,
+      "image": "/SSDNVMe2TB.jpg"
+    },
+    {
+      "id": 12,
+      "name": "HDD 2TB 7200RPM",
+      "precio": 85000,
+      "categoria": "storage",
+      "destacados": true,
+      "image": "/HDD2TB7200RPM.webp"
+    },
+    {
+      "id": 13,
+      "name": "Fuente 650W 80+ Bronze",
+      "precio": 115000,
+      "categoria": "psu",
+      "destacados": false,
+      "image": "/Fuente650W80Bronze.jpg"
+    },
+    {
+      "id": 14,
+      "name": "Fuente 750W 80+ Gold",
+      "precio": 145000,
+      "categoria": "psu",
+      "destacados": false,
+      "image": "/Fuente750W80Gold.jpg"
+    },
+    {
+      "id": 15,
+      "name": "Gabinete Mid Tower RGB",
+      "precio": 110000,
+      "categoria": "case",
+      "destacados": false,
+      "image": "/GabineteMidTowerRGB.jpg"
+    },
+    {
+      "id": 16,
+      "name": "Gabinete Mid Tower",
+      "precio": 145000,
+      "categoria": "case",
+      "destacados": true,
+      "image": "/GabineteMidTowerRGB2.jpg"
+    },
+    {
+      "id": 17,
+      "name": "Motherboard a520",
+      "precio": 60000,
+      "categoria": "motherboard",
+      "destacados": false,
+      "image": "/motherboardA520.jpeg"
+    },
+    {
+      "id": 18,
+      "name": "Fuente 850W  80+ gold",
+      "precio": 135000,
+      "categoria": "psu",
+      "destacados": true,
+      "image": "/FUENTE850WGAMEMAX80PLUSGOLD.webp"
+    },
+    {
+      "id": 19,
+      "name": "Monitor 24 144Hz",
+      "precio": 320000,
+      "categoria": "monitor",
+      "destacados": true,
+      "image": "/Monitor24144Hz.webp"
+    },
+    {
+      "id": 20,
+      "name": "Teclado Mecánico RGB",
+      "precio": 85000,
+      "categoria": "perifericos",
+      "destacados": true,
+      "image": "/TecladoMecánicoRGB.webp"
+    }
+  ]
+}

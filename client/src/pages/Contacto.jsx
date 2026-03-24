@@ -1,7 +1,27 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import { Icon } from "@iconify/react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
 import Styles from "../styles/pages/Contact.module.css";
 function Contact() {
+  const contactSchema = z.object({
+    name: z.string().min(3, "Minimo 3 caracteres."),
+    email: z.string().email("Email no valido."),
+    message: z
+      .string()
+      .min(15, "Minimo 15 caracteres.")
+      .max(140, "Te pasaste de caracteres, maximo 140."),
+  });
+  const ContactForm = useForm({
+    resolver: zodResolver(contactSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      message: "",
+    },
+  });
+  const sendContact = (data) => {};
   return (
     <Fragment>
       <section id={Styles.ContactContainer}>
@@ -26,14 +46,67 @@ function Contact() {
           </ul>
         </article>
 
-        <form action="" id={Styles.FormContact}>
+        <form
+          onSubmit={ContactForm.handleSubmit(sendContact)}
+          id={Styles.FormContact}
+        >
           <h3>Envianos un mensaje</h3>
-          <label htmlFor="">Nombre</label>
-          <input type="text" placeholder="Nombre completo" />
-          <label htmlFor="">Email</label>
-          <input type="email" placeholder="Email" />
-          <label htmlFor="">Mensaje</label>
-          <input type="text" placeholder="Escribe tu consulta o mensaje" />
+          <fieldset>
+            <label htmlFor="">Nombre</label>
+            <input
+              {...ContactForm.register("name")}
+              type="text"
+              placeholder="Nombre completo"
+              className={
+                !ContactForm.getFieldState("name").invalid &&
+                ContactForm.getFieldState("name").isTouched
+                  ? Styles.valid
+                  : ""
+              }
+            />
+            {ContactForm.formState.errors.name && (
+              <p className={Styles.error}>
+                {ContactForm.formState.errors.name.message}
+              </p>
+            )}
+          </fieldset>
+          <fieldset>
+            <label htmlFor="">Email</label>
+            <input
+              type="email"
+              {...ContactForm.register("email")}
+              placeholder="Email"
+              className={
+                !ContactForm.getFieldState("email").invalid &&
+                ContactForm.getFieldState("email").isTouched
+                  ? Styles.valid
+                  : ""
+              }
+            />
+            {ContactForm.formState.errors.email && (
+              <p className={Styles.error}>
+                {ContactForm.formState.errors.email.message}
+              </p>
+            )}
+          </fieldset>
+          <fieldset>
+            <label htmlFor="">Mensaje</label>
+            <textarea
+              {...ContactForm.register("message")}
+              placeholder="Escribe tu consulta o mensaje"
+              className={
+                !ContactForm.getFieldState("message").invalid &&
+                ContactForm.getFieldState("message").isTouched
+                  ? Styles.valid
+                  : ""
+              }
+            />
+            {ContactForm.formState.errors.message && (
+              <p className={Styles.error}>
+                {ContactForm.formState.errors.message.message}
+              </p>
+            )}
+          </fieldset>
           <button id={Styles.BtnSubmmit}>Enviar</button>
         </form>
       </section>

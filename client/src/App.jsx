@@ -20,6 +20,13 @@ const Profile = lazy(() => import("./pages/Profile"));
 const Orders = lazy(() => import("./pages/Orders"));
 const Checkout = lazy(() => import("./pages/Checkout"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
+// Services
+import {
+  allProductsAdmins,
+  allProductsCustomers,
+  allProductsByCategory,
+  oneProduct,
+} from "./services/ProductLoader";
 export const App = createBrowserRouter([
   {
     path: "/",
@@ -59,27 +66,25 @@ export const App = createBrowserRouter([
             <Products />
           </Loader>
         ),
-        loader: async () => {},
-        children: [
-          {
-            path: ":categoria",
-            element: (
-              <Loader>
-                <Category />
-              </Loader>
-            ),
-            loader: async ({ params }) => {},
-          },
-          {
-            path: ":id",
-            element: (
-              <Loader>
-                <Detail />
-              </Loader>
-            ),
-            loader: async ({ params }) => {},
-          },
-        ],
+      },
+      // loader: allProductsCustomers,
+      {
+        path: "productos/categoria/:categoria",
+        element: (
+          <Loader>
+            <Category />
+          </Loader>
+        ),
+        // loader: allProductsByCategory,
+      },
+      {
+        path: "productos/:id",
+        element: (
+          <Loader>
+            <Detail />
+          </Loader>
+        ),
+        // loader: oneProduct,
       },
 
       {
@@ -142,6 +147,7 @@ export const App = createBrowserRouter([
         children: [
           {
             index: true,
+            // loader: allProductsAdmins,
             element: (
               <Loader>
                 <Dashboard />

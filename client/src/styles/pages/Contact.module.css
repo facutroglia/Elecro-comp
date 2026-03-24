@@ -5,12 +5,12 @@
 }
 #InfoContact {
   flex: 1;
-  width: 100%;
-  margin: 3rem;
+
+  margin: 2rem;
   justify-content: start;
   flex-direction: column;
   align-items: center;
-  padding: 1rem;
+  padding: 0.5rem;
   transition: transform 0.3s ease;
   background-color: var(--soft-01);
   border-radius: 15px;
@@ -42,22 +42,30 @@
   transition: transform 0.3s ease;
 }
 #FormContact {
-  margin: 3rem;
+  margin: 2rem;
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: start;
   justify-content: start;
-  padding: 0.25rem;
-
+  padding: 1rem;
   background-color: var(--soft-01);
   border-radius: 15px;
-
+  gap: 1rem;
+  fieldset {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
   h3 {
     font-size: 2.5rem;
     margin-bottom: 3rem;
   }
-  input {
+  input,
+  textarea {
     width: 100%;
     border: none;
     outline: none;
@@ -65,15 +73,27 @@
     align-items: center;
     justify-content: center;
     padding: 0.5rem;
-    margin-bottom: 1.5rem;
     border-radius: 10px;
     background-color: var(--soft-02);
-    color: var(--secondary);
+    color: var(--white);
     transition: all 0.3ms ease-in-out;
     &:focus {
       background-color: var(--secondary);
       color: var(--white);
     }
+    &::placeholder {
+      opacity: 1;
+      color: var(--white);
+    }
+    &.valid {
+      outline: 0.1rem solid var(--success);
+    }
+  }
+  .error {
+    background-color: var(--error);
+    width: 100%;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.25rem;
   }
 }
 #BtnSubmmit {
@@ -88,5 +108,11 @@
   &:hover {
     background-color: var(--soft-02);
     transform: scale(1.05);
+  }
+}
+
+@media (max-width: 768px) {
+  #ContactContainer {
+    flex-direction: column;
   }
 }

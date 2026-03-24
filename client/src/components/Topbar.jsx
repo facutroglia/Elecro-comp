@@ -19,17 +19,11 @@ const Topbar = () => {
             <NavLink to={"/acceso"}>
               <Icon icon="material-symbols:login" />
             </NavLink>
-            <NavLink to={"/registro"}>
-              <Icon icon="mdi:account" />
-            </NavLink>
           </Fragment>
         )}
         {user && !user.isAdmin && (
           <Fragment>
             <NavLink to={"/usuario"}>
-              <Icon icon="mdi:account" />
-            </NavLink>
-            <NavLink to={"/usuario/compras"}>
               <Icon icon="mdi:account" />
             </NavLink>
           </Fragment>

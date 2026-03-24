@@ -5,20 +5,41 @@ import { NavLink } from "react-router";
 import { useMobile } from "../context/useMobile";
 const CategoryNav = () => {
   const { isMobile } = useMobile();
-  const [open, setOpen] = useState(false);
-  console.log(open);
+  const [openMenu, setOpenMenu] = useState(false);
+  const [openCategory, setOpenCategory] = useState(false);
   return (
     <header id={styles.NavCategory}>
-      <button id={styles.Category} onClick={() => setOpen(!open)}>
-        {isMobile ? (
-          <Icon id={styles.SvgCategory} icon="mingcute:down-line" />
-        ) : (
-          <>
+      <form onSubmit={(e) => e.preventDefault()} className={styles.actions}>
+        <button
+          type="button"
+          className={`${styles.btns} ${styles.category}`}
+          onClick={() => {
+            setOpenCategory(!openCategory);
+            setOpenMenu(false);
+          }}
+        >
+          {isMobile ? (
+            <Icon id={styles.SvgCategory} icon="mingcute:down-line" />
+          ) : (
+            <>
+              <Icon id={styles.SvgCategory} icon="ion:menu" />
+              Todas las categorias
+            </>
+          )}
+        </button>
+        {isMobile && (
+          <button
+            type="button"
+            className={`${styles.btns} ${styles.menu}`}
+            onClick={() => {
+              setOpenCategory(false);
+              setOpenMenu(!openMenu);
+            }}
+          >
             <Icon id={styles.SvgCategory} icon="ion:menu" />
-            Todas las categorias
-          </>
+          </button>
         )}
-      </button>
+      </form>
 
       {!isMobile && (
         <nav id={styles.MenuSeccion}>
@@ -34,7 +55,7 @@ const CategoryNav = () => {
         </nav>
       )}
       {isMobile && (
-        <nav id={styles.MenuMobile} className={open ? styles.active : ""}>
+        <nav id={styles.MenuMobile} className={openMenu ? styles.active : ""}>
           <NavLink
             to="/productos"
             className={styles.linkReset}
