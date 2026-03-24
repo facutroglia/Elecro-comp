@@ -12,15 +12,16 @@ function Contact() {
           <ul>
             <li>
               <Icon icon="fluent:mail-28-filled" />
-              email
+              Electro-comp@gmail.com
             </li>
             <li>
               {" "}
-              <Icon icon="tabler:phone-filled"></Icon>telefono
+              <Icon icon="tabler:phone-filled"></Icon>351-2514-923
             </li>
             <li>
               {" "}
-              <Icon icon="solar:map-point-bold"></Icon>ubicacion
+              <Icon icon="solar:map-point-bold"></Icon>Cordoba, Cordoba -
+              Argentina
             </li>
           </ul>
         </article>
@@ -32,7 +33,7 @@ function Contact() {
           <label htmlFor="">Email</label>
           <input type="email" placeholder="Email" />
           <label htmlFor="">Mensaje</label>
-          <input type="text" placeholder="Escribe tu consulta" />
+          <input type="text" placeholder="Escribe tu consulta o mensaje" />
           <button id={Styles.BtnSubmmit}>Enviar</button>
         </form>
       </section>

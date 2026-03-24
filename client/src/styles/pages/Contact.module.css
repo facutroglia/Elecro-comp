@@ -4,12 +4,16 @@
   justify-content: space-around;
 }
 #InfoContact {
+  flex: 1;
   width: 100%;
+  margin: 3rem;
   justify-content: start;
   flex-direction: column;
   align-items: center;
   padding: 1rem;
   transition: transform 0.3s ease;
+  background-color: var(--soft-01);
+  border-radius: 15px;
 
   h3 {
     font-size: 3.5rem;
@@ -19,44 +23,70 @@
     border: solid 1px var(--primary);
     background-color: var(--soft-01);
     border-radius: 20px;
-    font-size: 2rem;
-    text-align: start;
+    font-size: 1.5rem;
+    align-items: center;
     display: flex;
     gap: 1rem;
-    padding: 1rem;
+    padding: 0.5rem;
     margin: 2.5rem;
+    cursor: pointer;
   }
 
   svg {
     font-size: 3rem;
+    color: var(--primary);
   }
 }
 #InfoContact li:hover {
-  transform: scale(1.02);
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
 }
 #FormContact {
-  width: 100%;
-  display: flex;
-  justify-content: start;
-  flex-direction: column;
   margin: 3rem;
-  gap: 1rem;
-  border-radius: 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  padding: 0.25rem;
+
+  background-color: var(--soft-01);
+  border-radius: 15px;
 
   h3 {
     font-size: 2.5rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 3rem;
   }
   input {
+    width: 100%;
+    border: none;
+    outline: none;
+    resize: none;
     align-items: center;
     justify-content: center;
     padding: 0.5rem;
+    margin-bottom: 1.5rem;
     border-radius: 10px;
-    margin: 0.5rem;
+    background-color: var(--soft-02);
+    color: var(--secondary);
+    transition: all 0.3ms ease-in-out;
+    &:focus {
+      background-color: var(--secondary);
+      color: var(--white);
+    }
   }
 }
 #BtnSubmmit {
   display: flex;
+  padding: 1rem 2rem;
+  border-radius: 15px;
   align-items: center;
   justify-content: center;
+  background-color: var(--primary);
+  font-size: 20px;
+  color: var(--white);
+  &:hover {
+    background-color: var(--soft-02);
+    transform: scale(1.05);
+  }
 }

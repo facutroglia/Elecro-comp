@@ -33,7 +33,7 @@ const Footer = () => {
 
         <address className={styles.ContactInfo}>
           <p>
-            <Icon icon={"line-md:phone-filled"}></Icon> 351251492
+            <Icon icon={"line-md:phone-filled"}></Icon> 351-2514-923
           </p>
           <p>
             <Icon icon={"solar:map-point-bold"}></Icon> Cordoba, Cordoba -
