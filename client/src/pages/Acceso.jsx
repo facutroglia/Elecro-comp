@@ -8,7 +8,7 @@ import styles from "../styles/pages/Acceso.module.css";
 const Acceso = () => {
   const AccesoSchema = z.object({
     email: z.string().email("Email no valido"),
-    password: z.string().password("Constraseña incorrecta"),
+    password: z.string().min(3, "Constraseña incorrecta"),
   });
   const AccesoForm = useForm({
     resolver: zodResolver(AccesoSchema),
@@ -20,23 +20,60 @@ const Acceso = () => {
   const SendAcceso = (data) => {};
   return (
     <Fragment>
-      <section id={styles.AccesoContainer}>
-        <h3>Iniciá secion</h3>
-        <form onSubmit={AccesoForm.handleSubmit(S)} id={styles.FormLogin}>
-          <fieldset>
-            <label htmlFor="">Email</label>
-            <input type="email" placeholder="Ingresa tu email" />
-          </fieldset>
-          <fieldset>
-            <label htmlFor="">Contraseña</label>
-            <input type="password" placeholder="Ingresa tu contraseña" />
-          </fieldset>
-          <button id={styles.BtnLogin}>Iniciar secion</button>
-        </form>
-        <p>
-          <NavLink to="/registro">¿No tenes cuenta? Regitrate</NavLink>
-        </p>
-      </section>
+      <main id={styles.Container}>
+        <section id={styles.AccesoContainer}>
+          <h3>Iniciá sesion</h3>
+          <form
+            onSubmit={AccesoForm.handleSubmit(SendAcceso)}
+            id={styles.FormLogin}
+          >
+            <fieldset>
+              <label htmlFor="">Email</label>
+              <input
+                {...AccesoForm.register("email")}
+                type="email"
+                placeholder="Ingresa tu email"
+                className={
+                  !AccesoForm.getFieldState("email").invalid &&
+                  AccesoForm.getFieldState("email").isTouched
+                    ? styles.valid
+                    : ""
+                }
+              />
+              {AccesoForm.formState.errors.email && (
+                <p className={styles.error}>
+                  {AccesoForm.formState.errors.email.message}
+                </p>
+              )}
+            </fieldset>
+            <fieldset>
+              <label htmlFor="">Contraseña</label>
+              <input
+                type="password"
+                {...AccesoForm.register("password")}
+                placeholder="Ingresa tu contraseña"
+                className={
+                  !AccesoForm.getFieldState("password").invalid &&
+                  AccesoForm.getFieldState("password").isTouched
+                    ? styles.valid
+                    : ""
+                }
+              />
+              {AccesoForm.formState.errors.password && (
+                <p className={styles.error}>
+                  {AccesoForm.formState.errors.password.message}
+                </p>
+              )}
+            </fieldset>
+            <button id={styles.BtnLogin}>Iniciar secion</button>
+          </form>
+          <p>
+            <NavLink to="/registro" className={styles.LinkRegister}>
+              ¿No tenes cuenta? Regitrate
+            </NavLink>
+          </p>
+        </section>
+      </main>
     </Fragment>
   );
 };

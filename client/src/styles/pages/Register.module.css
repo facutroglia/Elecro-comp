@@ -1,0 +1,59 @@
+#Container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+#AccesoContainer {
+  background-color: var(--soft-01);
+  border-radius: 15px;
+  padding: 1.8rem;
+  margin: 2rem;
+  text-align: center;
+
+  h3 {
+    margin-top: 1rem;
+    font-size: 25px;
+  }
+  fieldset {
+    text-align: start;
+    padding: 0.5rem;
+  }
+  input {
+    width: 100%;
+    border: none;
+    outline: none;
+    resize: none;
+    background-color: var(--soft-02);
+    color: var(--white);
+    border-radius: 12px;
+    padding: 0.5rem;
+
+    &::placeholder {
+      opacity: 1;
+      color: var(--white);
+    }
+    &.valid {
+      border: solid 1px var(--success);
+    }
+  }
+}
+#FormLogin {
+  padding: 1rem;
+}
+.error {
+  color: var(--error);
+  border-radius: 0.25rem;
+}
+#BtnLogin {
+  margin: 1rem;
+  padding: 0.5rem;
+  border-radius: 15px;
+  background-color: var(--primary);
+  font-size: 15px;
+  color: var(--white);
+  &:hover {
+    background-color: var(--soft-02);
+    transform: scale(1.05);
+  }
+}

@@ -17,8 +17,8 @@ const Products = () => {
   }, [pathname, search]);
   return (
     <Fragment>
-      <section>
-        <header>
+      <section className={styles.ProductsContainer}>
+        <header className={styles.TitleProduct}>
           {q && <h2>Resultados de la busqueda: {q}</h2>}
           {!q && <h2>Nuestros Productos</h2>}
         </header>
@@ -26,11 +26,21 @@ const Products = () => {
         <footer>
           {/* Paginacion */}
           <form id={styles.paginate}>
-            <button type="button" onClick={() => navigate(0)} disabled={false}>
+            <button
+              className={styles.BtnPaginate}
+              type="button"
+              onClick={() => navigate(0)}
+              disabled={false}
+            >
               <Icon icon="mdi:arrow-left" />
             </button>
             <output>{p}</output>
-            <button type="button" onClick={() => navigate(0)} disabled={false}>
+            <button
+              className={styles.BtnPaginate}
+              type="button"
+              onClick={() => navigate(0)}
+              disabled={false}
+            >
               <Icon icon="mdi:arrow-right" />
             </button>
           </form>

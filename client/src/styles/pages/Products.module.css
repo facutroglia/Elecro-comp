@@ -1,0 +1,24 @@
+.ProductsContainer {
+  width: 100%;
+}
+.TitleProduct {
+  text-align: center;
+  margin: 1rem;
+}
+#paginate {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 1rem;
+  align-items: center;
+}
+.BtnPaginate {
+  background: none;
+  font-size: 30px;
+  color: var(--primary);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.BtnPaginate:hover {
+  transform: scale(1.02);
+}
