@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 import styles from "../styles/components/CategoryNav.module.css";
-import { NavLink } from "react-router";
+import { NavLink, useLocation } from "react-router";
 import { useMobile } from "../context/useMobile";
 const CategoryNav = () => {
   const { isMobile } = useMobile();
+  const location = useLocation();
   const [openMenu, setOpenMenu] = useState(false);
   const [openCategory, setOpenCategory] = useState(false);
+  useEffect(() => {
+    setOpenMenu(false);
+    setOpenCategory(false);
+  }, [location]);
   return (
     <header id={styles.NavCategory}>
       <form onSubmit={(e) => e.preventDefault()} className={styles.actions}>
@@ -81,6 +86,44 @@ const CategoryNav = () => {
           </NavLink>
         </nav>
       )}
+      <nav id={styles.categories} className={openCategory ? styles.open : null}>
+        <NavLink to="/productos/categoria/procesador">
+          {!isMobile && (
+            <img
+              src="https://placehold.co/72/36013F/violet/png?text=Pc"
+              alt=""
+            />
+          )}
+          <span>Procesador</span>
+        </NavLink>
+        <NavLink to="/productos/categoria/memorias">
+          {!isMobile && (
+            <img
+              src="https://placehold.co/72/36013F/violet/png?text=Mr"
+              alt=""
+            />
+          )}
+          <span>Memorias</span>
+        </NavLink>
+        <NavLink to="/productos/categoria/placas">
+          {!isMobile && (
+            <img
+              src="https://placehold.co/72/36013F/violet/png?text=Pl"
+              alt=""
+            />
+          )}
+          <span>Placas</span>
+        </NavLink>
+        <NavLink to="/productos/categoria/graficas">
+          {!isMobile && (
+            <img
+              src="https://placehold.co/72/36013F/violet/png?text=Gf"
+              alt=""
+            />
+          )}
+          <span>Graficas</span>
+        </NavLink>
+      </nav>
     </header>
   );
 };

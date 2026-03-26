@@ -52,6 +52,7 @@
   background-color: var(--primary);
   font-size: 15px;
   color: var(--white);
+
   &:hover {
     background-color: var(--soft-02);
     transform: scale(1.05);

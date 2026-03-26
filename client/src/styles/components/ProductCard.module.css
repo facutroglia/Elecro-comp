@@ -7,12 +7,15 @@
   border-radius: 15px;
   margin: 0.5rem;
 }
-picture {
+.Card picture {
   display: flex;
   justify-content: center;
 }
-dl {
+.Card dl {
   margin: 0.5rem;
+}
+.Card dt {
+  display: none;
 }
 .Title {
   color: var(--soft-04);

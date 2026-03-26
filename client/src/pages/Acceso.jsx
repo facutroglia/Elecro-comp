@@ -65,7 +65,9 @@ const Acceso = () => {
                 </p>
               )}
             </fieldset>
-            <button id={styles.BtnLogin}>Iniciar secion</button>
+            <button id={styles.BtnLogin}>
+              <NavLink to="/home">Iniciar secion</NavLink>
+            </button>
           </form>
           <p>
             <NavLink to="/registro" className={styles.LinkRegister}>

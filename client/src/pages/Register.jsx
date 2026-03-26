@@ -106,7 +106,9 @@ const Register = () => {
                 </p>
               )}
             </fieldset>
-            <button id={styles.BtnLogin}>Registrarse</button>
+            <button id={styles.BtnLogin}>
+              <NavLink to="/acceso">Registrarse</NavLink>
+            </button>
           </form>
         </section>
       </main>

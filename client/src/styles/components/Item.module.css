@@ -1,0 +1,33 @@
+.ItemProducto {
+  border: solid 1px red;
+}
+.Datos {
+  font-weight: 500;
+}
+.Cantidad {
+  background-color: var(--primary);
+  border: none;
+  outline: none;
+  width: 30px;
+  text-align: center;
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  &:focus {
+    background-color: var(--secondary);
+    color: var(--white);
+  }
+}
+.BtnEliminar {
+  background-color: var(--error);
+  padding: 0.5rem;
+  font-size: 20px;
+  color: var(--white);
+  border-radius: 5px;
+}
+.BtnEliminar:hover {
+  background-color: rgb(250, 69, 42);
+}
