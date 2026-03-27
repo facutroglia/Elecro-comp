@@ -1,0 +1,15 @@
+#OrdersContainer {
+  display: flex;
+  width: 100%;
+}
+.Content {
+  flex: 1;
+}
+.Content h2 {
+  font-size: 40px;
+  margin-bottom: 2rem;
+}
+.TableProducts {
+  width: 100%;
+  text-align: center;
+}

@@ -5,7 +5,7 @@ import Item from "../components/Item";
 const Cart = () => {
   return (
     <Fragment>
-      <h1>Carrito de compras</h1>
+      <h2>Carrito de compras</h2>
       <section id={styles.CartContainer}>
         <table className={styles.TableProducts}>
           <thead>

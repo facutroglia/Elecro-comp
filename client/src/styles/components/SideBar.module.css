@@ -1,0 +1,24 @@
+.Sidebar {
+  border-radius: 0 15px 15px 0;
+  background-color: var(--soft-02);
+  padding: 0.5rem;
+  border: solid 2px var(--secondary);
+}
+.NameUser {
+  margin-bottom: 1.5rem;
+  padding: 0.25rem;
+  border-bottom: solid 1px var(--primary);
+}
+.NavProfile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.NavProfile a {
+  color: var(--white);
+  text-decoration: none;
+  font-weight: 500;
+}
+.NavProfile a:hover {
+  color: var(--secondary);
+}

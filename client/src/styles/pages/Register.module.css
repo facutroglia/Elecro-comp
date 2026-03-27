@@ -58,3 +58,7 @@
     transform: scale(1.05);
   }
 }
+#BtnLogin a {
+  color: white; /* Cambiá el color que quieras */
+  text-decoration: none; /* Saca la línea de abajo */
+}

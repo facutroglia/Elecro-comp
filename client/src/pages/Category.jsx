@@ -22,19 +22,29 @@ const Category = () => {
   }, [pathname, search, params]);
   return (
     <Fragment>
-      <section>
-        <header>
+      <section id={styles.CategoryContainer}>
+        <header className={styles.TitleCategory}>
           <h2>Productos de la categoria: {c}</h2>
         </header>
         <ProductList />
         <footer>
           {/* Paginacion */}
           <form id={styles.paginate}>
-            <button type="button" onClick={() => navigate(0)} disabled={true}>
+            <button
+              className={styles.BtnPaginate}
+              type="button"
+              onClick={() => navigate(0)}
+              disabled={true}
+            >
               <Icon icon="mdi:arrow-left" />
             </button>
             <output>{p}</output>
-            <button type="button" onClick={() => navigate(0)} disabled={true}>
+            <button
+              className={styles.BtnPaginate}
+              type="button"
+              onClick={() => navigate(0)}
+              disabled={true}
+            >
               <Icon icon="mdi:arrow-right" />
             </button>
           </form>
