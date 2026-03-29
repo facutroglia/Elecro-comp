@@ -59,6 +59,6 @@
   }
 }
 #BtnLogin a {
-  color: white; /* Cambiá el color que quieras */
-  text-decoration: none; /* Saca la línea de abajo */
+  color: white;
+  text-decoration: none;
 }

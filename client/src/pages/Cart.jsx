@@ -68,7 +68,7 @@ const Cart = () => {
           </tfoot>
         </table>
 
-        {user && (
+        {user && cartItems.length > 0 && (
           <NavLink to="/usuario/checkout" className={styles.BtnPay}>
             Finalizar compra
           </NavLink>
