@@ -27,6 +27,7 @@ import {
   allProductsByCategory,
   oneProduct,
 } from "./services/ProductLoader";
+import Favorites from "./pages/Favorites";
 export const App = createBrowserRouter([
   {
     path: "/",
@@ -132,6 +133,14 @@ export const App = createBrowserRouter([
             ),
           },
           {
+            path: "favoritos",
+            element: (
+              <Loader>
+                <Favorites />
+              </Loader>
+            ),
+          },
+          {
             path: "checkout",
             element: (
               <Loader>
@@ -147,7 +156,7 @@ export const App = createBrowserRouter([
         children: [
           {
             index: true,
-            // loader: allProductsAdmins,
+            //loader: allProductsAdmins,
             element: (
               <Loader>
                 <Dashboard />

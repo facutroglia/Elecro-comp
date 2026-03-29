@@ -2,36 +2,49 @@ import React from "react";
 import styles from "../styles/components/Item.module.css";
 import { Fragment } from "react";
 import { Icon } from "@iconify/react";
+import { useCart } from "../context/useCart.jsx";
+import { id } from "zod/v4/locales";
 
-function Item() {
+function Item({ producto, cantidad }) {
+  const { add, reduce, remove } = useCart();
+  const subtotal = (producto.precio || 0) * (cantidad || 0);
   return (
     <Fragment>
       <tr className={styles.ItemProducto}>
-        <td className={styles.Datos}>RTX 4060 8GB</td>
-        <td className={styles.Datos}>$ 10000</td>
-        <td>
-          <input className={styles.Cantidad} type="number" step={1} min={1} />
+        <td data-label="Producto" className={styles.Datos}>
+          {producto.name}
         </td>
-        <td>
-          <output className={styles.Datos}>$ 10000</output>
+        <td data-label="Precio" className={styles.Datos}>
+          {producto.precio?.toLocaleString(`es-AR`)}
         </td>
-        <td>
-          <button className={styles.BtnEliminar} type="button">
-            <Icon icon="boxicons:trash"></Icon>
+        <td data-label="Cantidad" className={styles.Cantidad}>
+          <button
+            className={styles.BtnCantidad}
+            type="button"
+            onClick={() => reduce(producto)}
+          >
+            <Icon icon="akar-icons:minus"></Icon>
+          </button>
+          <output>{cantidad || 0}</output>
+          <button
+            className={styles.BtnCantidad}
+            type="button"
+            onClick={() => add(producto)}
+          >
+            <Icon icon="akar-icons:plus"></Icon>
           </button>
         </td>
-      </tr>
-      <tr className={styles.ItemProducto}>
-        <td className={styles.Datos}>RTX 4060 8GB</td>
-        <td className={styles.Datos}>$ 10000</td>
-        <td>
-          <input className={styles.Cantidad} type="number" step={1} min={1} />
+        <td data-label="Sub total">
+          <output className={styles.Datos}>
+            {subtotal.toLocaleString(`es-AR`)}
+          </output>
         </td>
         <td>
-          <output className={styles.Datos}>$ 10000</output>
-        </td>
-        <td>
-          <button className={styles.BtnEliminar} type="button">
+          <button
+            className={styles.BtnEliminar}
+            type="button"
+            onClick={() => remove(producto.id)}
+          >
             <Icon icon="boxicons:trash"></Icon>
           </button>
         </td>

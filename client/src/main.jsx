@@ -6,17 +6,20 @@ import { App } from "./App.jsx";
 import { UserProvider } from "./context/useUser.jsx";
 import { CartProvider } from "./context/useCart.jsx";
 import { MobileProvider } from "./context/useMobile.jsx";
+import { FavoritesProvider } from "./context/useFavorite.jsx";
 const $ = (selector) => document.getElementById(selector);
 const $root = $("root");
 const root = createRoot($root);
 root.render(
   <Fragment>
-    <UserProvider>
-      <CartProvider>
-        <MobileProvider>
-          <RouterProvider router={App} />
-        </MobileProvider>
-      </CartProvider>
-    </UserProvider>
+    <FavoritesProvider>
+      <UserProvider>
+        <CartProvider>
+          <MobileProvider>
+            <RouterProvider router={App} />
+          </MobileProvider>
+        </CartProvider>
+      </UserProvider>
+    </FavoritesProvider>
   </Fragment>,
 );

@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import styles from "../styles/pages/Orders.module.css";
 import SideBar from "../components/SideBar.jsx";
-import Compras from "../components/Compras.jsx";
+import OrderedProducts from "../components/OrderedProducts.jsx";
 
 const Orders = () => {
   return (
@@ -20,7 +20,7 @@ const Orders = () => {
               </tr>
             </thead>
             <tbody className={styles.Tbody}>
-              <Compras />
+              <OrderedProducts />
             </tbody>
           </table>
         </section>

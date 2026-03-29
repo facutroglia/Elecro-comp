@@ -1,8 +1,8 @@
-import styles from "../styles/pages/Checkout.module.css";
+import styles from "../styles/pages/Dashboard.module.css";
 import { Fragment } from "react";
 
 const Dashboard = () => {
-  return <Fragment>Dashboard</Fragment>;
+  return <Fragment></Fragment>;
 };
 
 export default Dashboard;

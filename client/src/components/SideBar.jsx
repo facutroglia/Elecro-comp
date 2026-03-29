@@ -17,11 +17,11 @@ const SideBar = () => {
             {" "}
             <Icon icon="mdi:user"></Icon> Mi cuenta
           </NavLink>
-          <NavLink to="./compras">
+          <NavLink to="/usuario/compras">
             {" "}
             <Icon icon="weui:shop-filled"></Icon> Mis pedidos
           </NavLink>
-          <NavLink to="/favoritos">
+          <NavLink to="/usuario/favoritos">
             {" "}
             <Icon icon="mdi:heart"></Icon> Favoritos
           </NavLink>

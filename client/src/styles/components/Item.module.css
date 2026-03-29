@@ -1,24 +1,17 @@
 .ItemProducto {
-  border: solid 1px red;
 }
 .Datos {
   font-weight: 500;
 }
 .Cantidad {
-  background-color: var(--primary);
-  border: none;
-  outline: none;
-  width: 30px;
-  text-align: center;
-  &::-webkit-outer-spin-button,
-  &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-  &:focus {
-    background-color: var(--secondary);
-    color: var(--white);
+  display: flex;
+  gap: 0.5rem;
+  justify-content: space-between;
+  & output {
+    font-size: 1.25rem;
+    font-weight: 500;
+    flex: 1;
+    text-align: center;
   }
 }
 .BtnEliminar {
@@ -27,7 +20,28 @@
   font-size: 20px;
   color: var(--white);
   border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    background-color: var(--white);
+    color: var(--error);
+  }
 }
-.BtnEliminar:hover {
-  background-color: rgb(250, 69, 42);
+
+.BtnCantidad {
+  background-color: var(--primary);
+  padding: 0.5rem;
+  font-size: 1rem;
+  color: var(--white);
+  border-radius: 0.25rem;
+  aspect-ratio: 1/1;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    background-color: var(--white);
+    color: var(--primary);
+  }
 }

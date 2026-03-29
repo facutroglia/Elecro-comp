@@ -1,37 +1,164 @@
-#CartContainer {
+.CartContainer {
   width: 100%;
+  max-width: 900px;
+  margin: 1rem auto 2rem;
   text-align: center;
-  padding: 1rem;
+  padding: 2rem;
+  background-color: var(--soft-01);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
+}
+
+.Header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.Title {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: var(--white);
+  font-weight: 700;
+}
+
+.BtnClear {
+  background-color: transparent;
+  color: var(--white);
+  border: 2px solid var(--white);
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  aspect-ratio: 1/1;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  &:hover {
+    background-color: var(--white);
+    color: var(--primary);
+  }
 }
 
 .TableProducts {
-  background-color: var(--soft-02);
-  margin-top: 1rem;
-  border-radius: 15px;
   width: 100%;
-  text-align: center;
+  border-collapse: collapse;
 }
 
-#TheadTable {
-  border-bottom: 2px solid var(--primary);
+/* Forzamos estructura para poder scrollear tbody */
+.TableProducts thead,
+.TableProducts tbody,
+.TableProducts tfoot {
+  display: block;
 }
 
+.TableProducts thead {
+  width: 100%;
+}
+
+.TableProducts tbody {
+  max-height: 300px; /* ajustá según necesidad */
+  overflow-y: auto;
+  width: 100%;
+}
+
+.TableProducts tfoot {
+  width: 100%;
+}
+
+/* Filas como "table" para mantener columnas alineadas */
+.TableProducts thead tr,
+.TableProducts tbody tr,
+.TableProducts tfoot tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+/* Estética básica */
 .thTitle {
-  padding: 15px;
-  color: var(--secondary);
-  text-transform: uppercase;
-  font-size: 0.9rem;
+  text-align: center;
+  padding: 10px;
+  background-color: var(--primary);
+  position: sticky;
+  top: 0;
+  z-index: 2;
 }
 
-.Tbody tr:hover {
-  background-color: var(--secondary);
+.Tbody td,
+.Tfoot td {
+  padding: 10px;
+  border-top: 1px solid var(--primary);
 }
 
-.Tfoot tr {
-  text-align: right;
+/* Scrollbar opcional */
+.TableProducts tbody::-webkit-scrollbar {
+  width: 6px;
 }
+
+.TableProducts tbody::-webkit-scrollbar-thumb {
+  background: var(--secondary);
+  border-radius: 4px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .TableProducts thead {
+    display: none;
+  }
+
+  .TableProducts tbody tr {
+    display: block;
+    margin-bottom: 10px;
+    border: 1px solid var(--primary);
+    padding: 10px;
+  }
+
+  .TableProducts tbody td {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+  }
+
+  .TableProducts tbody td::before {
+    content: attr(data-label);
+    font-weight: bold;
+  }
+}
+
 .TdTotal {
-  color: var(--secondary);
-  font-size: 1.2rem;
-  padding: 1rem;
+  color: var(--primary);
+  font-size: 1.4rem;
+  padding: 1.5rem;
+  font-weight: bold;
+}
+
+.BtnPay {
+  background-color: var(--primary);
+  color: var(--white);
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: 2px solid var(--primary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px var(--soft-04);
+  text-decoration: none;
+  align-self: flex-end;
+}
+
+.BtnPay:hover {
+  background-color: transparent;
+  color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.BtnPay:active {
+  transform: translateY(0);
 }

@@ -1,36 +1,78 @@
 import { Fragment } from "react";
 import styles from "../styles/pages/Cart.module.css";
 import Item from "../components/Item";
+import { NavLink } from "react-router";
+import { useCart } from "../context/useCart.jsx";
+import { useUser } from "../context/useUser.jsx";
+import { Icon } from "@iconify/react";
 
 const Cart = () => {
+  const { cartItems, clear } = useCart();
+  const { user } = useUser();
+  const total = cartItems.reduce((acc, item) => {
+    return acc + item.precio * item.cantidad;
+  }, 0);
+
   return (
     <Fragment>
-      <h2>Carrito de compras</h2>
-      <section id={styles.CartContainer}>
-        <table className={styles.TableProducts}>
+      <section className={styles.CartContainer}>
+        <header className={styles.Header}>
+          <h2 className={styles.Title}>Carrito de compras</h2>
+          <button
+            type="button"
+            className={styles.BtnClear}
+            onClick={() => clear()}
+          >
+            <Icon icon="mdi:trash" />
+          </button>
+        </header>
+        <table
+          className={styles.TableProducts}
+          cellpadding="0"
+          cellspacing="0"
+          border="0"
+        >
           <thead>
             <tr id={styles.TheadTable}>
               <th className={styles.thTitle}>Producto</th>
               <th className={styles.thTitle}>Precio</th>
               <th className={styles.thTitle}>Cantidad</th>
               <th className={styles.thTitle}>Sub total</th>
+              <th className={styles.thTitle}>Eliminar</th>
             </tr>
           </thead>
           <tbody className={styles.Tbody}>
-            <Item />
+            {cartItems.length === 0 ? (
+              <tr>
+                <td colSpan="5" className={styles.EmptyCart}>
+                  No hay productos en el carrito
+                </td>
+              </tr>
+            ) : (
+              cartItems.map((item) => (
+                <Item key={item.id} producto={item} cantidad={item.cantidad} />
+              ))
+            )}
           </tbody>
           <tfoot className={styles.Tfoot}>
             <tr className={styles.tr}>
-              <td className={styles.TdTotal} colSpan="4">
-                <b>Total:</b>{" "}
+              <td className={styles.TdTotal} colSpan="5">
+                <b>Total:</b>
               </td>
               <td className={styles.TdTotal}>
-                {" "}
-                <b>80 USD</b>
+                <b>
+                  <b>${total.toLocaleString("es-AR")}</b>
+                </b>
               </td>
             </tr>
           </tfoot>
         </table>
+
+        {user && (
+          <NavLink to="/usuario/checkout" className={styles.BtnPay}>
+            Finalizar compra
+          </NavLink>
+        )}
       </section>
     </Fragment>
   );

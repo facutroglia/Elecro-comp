@@ -1,0 +1,17 @@
+.FavoritesContainer {
+  display: flex;
+  width: 100%;
+}
+.Content {
+  margin: 1rem;
+  width: 100%;
+}
+.Content h2 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+.FavoritesProducts {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+}
