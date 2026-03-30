@@ -1,0 +1,101 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model File{
+  id        String   @id @default(uuid())
+  name      String
+  url       String
+  type      String
+  user      User?   
+  product   Product[] 
+  category  Category?
+  brand  Brand?
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  avatarId  String?   @unique
+  name      String?
+  phone     String?
+  address   String?
+  codeZip   String?
+  isAdmin   Boolean  @default(false)
+  avatar    File?    @relation(fields: [avatarId], references: [id])
+  favorites Product[]   @relation("UserFavorites")
+  orders    Order[]
+}
+
+model Category {
+  id          String   @id @default(uuid())
+  name        String
+  iconId      String?   @unique
+  icon        File?    @relation(fields: [iconId], references: [id])
+  products    Product[]
+}
+
+model Brand {
+  id          String   @id @default(uuid())
+  name        String
+  logoId      String?   @unique
+  logo        File?    @relation(fields: [logoId], references: [id])
+  products    Product[]
+}
+
+
+model Atribute {
+  id          String   @id @default(uuid())
+  name        String
+  value       String
+  productId   String
+  product     Product  @relation(fields: [productId], references: [id])  
+}
+
+model Product {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  price       Float
+  categoryId    String
+  brandId    String
+  category      Category @relation(fields: [categoryId], references: [id])
+  brand      Brand @relation(fields: [brandId], references: [id])
+  gallery     File[]
+  favorites   User[]   @relation("UserFavorites")
+  items       Item[]
+  atributes   Atribute[]
+}
+
+model Order {
+  id          String   @id @default(uuid())
+  userId      String
+  name      String?
+  phone     String?
+  address   String?
+  codeZip   String?
+  date   DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id])
+  items Item[]
+}
+
+model Item {
+  id        String   @id @default(uuid())
+  orderId   String
+  productId String
+  price     Float
+  quantity  Int
+  order     Order    @relation(fields: [orderId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id])
+}
