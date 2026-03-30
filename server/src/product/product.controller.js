@@ -15,7 +15,6 @@ export const createProduct = async (req, res) => {
       return res.status(400).json({ error: "El precio debe ser mayor a 0" });
     }
 
-    // Verificar que categoryId y brandId existen
     const category = await prisma.category.findUnique({
       where: { id: categoryId },
     });
@@ -56,7 +55,6 @@ export const getProducts = async (req, res) => {
   try {
     const { search, category, brand, minPrice, maxPrice, page = 1 } = req.query;
 
-    // Construir el where clause
     const where = {};
     if (search) {
       where.name = { contains: search, mode: "insensitive" };
@@ -83,7 +81,6 @@ export const getProducts = async (req, res) => {
       }
     }
 
-    // Paginación
     const pageNum = parseInt(page);
     const limitNum = parseInt("4");
     if (isNaN(pageNum) || pageNum < 1) {
@@ -99,7 +96,6 @@ export const getProducts = async (req, res) => {
 
     const skip = (pageNum - 1) * limitNum;
 
-    // Contar total
     const total = await prisma.product.count({ where });
 
     // Obtener productos
@@ -128,7 +124,6 @@ export const getProducts = async (req, res) => {
   }
 };
 
-// Obtener un producto por ID
 export const getProductById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -154,7 +149,6 @@ export const getProductById = async (req, res) => {
   }
 };
 
-// Actualizar un producto
 export const updateProduct = async (req, res) => {
   try {
     const { name, description, price, categoryId, brandId, id } = req.body;
@@ -163,7 +157,6 @@ export const updateProduct = async (req, res) => {
       return res.status(400).json({ error: "El precio debe ser mayor a 0" });
     }
 
-    // Verificar existencia si se actualizan categoryId o brandId
     if (categoryId) {
       const category = await prisma.category.findUnique({
         where: { id: categoryId },
@@ -207,7 +200,6 @@ export const updateProduct = async (req, res) => {
   }
 };
 
-// Eliminar un producto
 export const deleteProduct = async (req, res) => {
   try {
     const { id } = req.body;

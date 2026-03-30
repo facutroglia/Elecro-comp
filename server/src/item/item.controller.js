@@ -1,6 +1,5 @@
 import prisma from "../libs/prisma.js";
 
-// Crear un item
 export const createItem = async (req, res) => {
   try {
     const { orderId, productId, quantity, price } = req.body;
@@ -11,13 +10,11 @@ export const createItem = async (req, res) => {
         .json({ error: "orderId, productId y quantity > 0 son requeridos" });
     }
 
-    // Verificar que la orden existe
     const order = await prisma.order.findUnique({ where: { id: orderId } });
     if (!order) {
       return res.status(400).json({ error: "Orden no encontrada" });
     }
 
-    // Verificar que el producto existe
     const product = await prisma.product.findUnique({
       where: { id: productId },
     });
@@ -25,7 +22,6 @@ export const createItem = async (req, res) => {
       return res.status(400).json({ error: "Producto no encontrado" });
     }
 
-    // Si no se pasa price, usar el del producto
     const itemPrice = price ? parseFloat(price) : product.price;
 
     const item = await prisma.item.create({
@@ -48,7 +44,6 @@ export const createItem = async (req, res) => {
   }
 };
 
-// Obtener items, opcionalmente filtrados por orderId
 export const getItems = async (req, res) => {
   try {
     const { orderId } = req.query;
@@ -72,7 +67,6 @@ export const getItems = async (req, res) => {
   }
 };
 
-// Obtener un item por ID
 export const getItemById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -96,7 +90,6 @@ export const getItemById = async (req, res) => {
   }
 };
 
-// Actualizar un item
 export const updateItem = async (req, res) => {
   try {
     const { quantity, price, id } = req.body;
@@ -132,7 +125,6 @@ export const updateItem = async (req, res) => {
   }
 };
 
-// Eliminar un item
 export const deleteItem = async (req, res) => {
   try {
     const { id } = req.body;

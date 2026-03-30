@@ -1,6 +1,5 @@
 import prisma from "../libs/prisma.js";
 
-// Crear una orden
 export const createOrder = async (req, res) => {
   try {
     const { userId, name, phone, address, codeZip, items } = req.body;
@@ -12,13 +11,11 @@ export const createOrder = async (req, res) => {
       });
     }
 
-    // Verificar que el usuario existe
     const user = await prisma.user.findUnique({ where: { id: userId } });
     if (!user) {
       return res.status(400).json({ error: "Usuario no encontrado" });
     }
 
-    // Validar items
     for (const item of items) {
       if (!item.productId || !item.quantity || item.quantity <= 0) {
         return res
@@ -33,13 +30,12 @@ export const createOrder = async (req, res) => {
           .status(400)
           .json({ error: `Producto con id ${item.productId} no encontrado` });
       }
-      // Si no se pasa price, usar el del producto
+
       if (!item.price) {
         item.price = product.price;
       }
     }
 
-    // Crear la orden y los items en una transacción
     const order = await prisma.order.create({
       data: {
         userId,
@@ -72,7 +68,6 @@ export const createOrder = async (req, res) => {
   }
 };
 
-// Obtener todas las órdenes
 export const getOrders = async (req, res) => {
   try {
     const orders = await prisma.order.findMany({
@@ -92,7 +87,6 @@ export const getOrders = async (req, res) => {
   }
 };
 
-// Obtener una orden por ID
 export const getOrder = async (req, res) => {
   try {
     const { id } = req.params;
@@ -120,7 +114,6 @@ export const getOrder = async (req, res) => {
   }
 };
 
-// Actualizar una orden
 export const updateOrder = async (req, res) => {
   try {
     const { name, phone, address, codeZip, id } = req.body;
@@ -153,12 +146,10 @@ export const updateOrder = async (req, res) => {
   }
 };
 
-// Eliminar una orden
 export const deleteOrder = async (req, res) => {
   try {
     const { id } = req.body;
 
-    // Eliminar items primero si es necesario, pero Prisma maneja cascada
     await prisma.order.delete({
       where: { id },
     });

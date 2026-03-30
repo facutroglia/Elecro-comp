@@ -1,6 +1,5 @@
 import prisma from "../libs/prisma.js";
 
-// CREATE - Crear un nuevo atributo
 export const createAtribute = async (req, res) => {
   try {
     const { name, value, productId } = req.body;
@@ -28,7 +27,6 @@ export const createAtribute = async (req, res) => {
   }
 };
 
-// READ - Obtener todos los atributos
 export const getAllAtributes = async (req, res) => {
   const { product } = req.query;
   const where = {};
@@ -58,7 +56,6 @@ export const getAllAtributes = async (req, res) => {
   }
 };
 
-// UPDATE - Actualizar un atributo
 export const updateAtribute = async (req, res) => {
   try {
     const { id } = req.body;
@@ -85,7 +82,6 @@ export const updateAtribute = async (req, res) => {
   }
 };
 
-// DELETE - Eliminar un atributo
 export const deleteAtribute = async (req, res) => {
   try {
     const { id } = req.body;
