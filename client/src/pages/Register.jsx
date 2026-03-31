@@ -1,13 +1,15 @@
 import { Fragment } from "react";
-import { data, NavLink } from "react-router";
+import { useNavigate, NavLink } from "react-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { useUser } from "../context/useUser";
 import styles from "../styles/pages/Register.module.css";
 const Register = () => {
+  const { setUser } = useUser();
+  const navigate = useNavigate();
   const RegisterSchema = z.object({
     name: z.string().min(3, "Minimo 3 caracteres"),
-    lastname: z.string().min(3, "Minimo 3 caracteres"),
     email: z.string().email("email no valido"),
     password: z.string().min(3, "Constraseña incorrecta"),
   });
@@ -15,23 +17,47 @@ const Register = () => {
     resolver: zodResolver(RegisterSchema),
     defaultValues: {
       name: "",
-      lastname: "",
       email: "",
       password: "",
     },
   });
-  const SendRegister = (data) => {};
+  const sendRegister = async (data) => {
+    if (data.email.includes("@ecom.com")) {
+      data.isAdmin = true;
+    }
+
+    try {
+      const request = await fetch("/api/usuarios/registrar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const response = await request.json();
+      if (!request.ok) {
+        throw new Error(response.error || "Error al registrar usuario");
+      }
+      setUser(response);
+      return navigate("/");
+    } catch (error) {
+      RegisterForm.reset();
+      RegisterForm.setError("root", {
+        message: error.message,
+      });
+    }
+  };
   return (
     <Fragment>
       <main id={styles.Container}>
         <section id={styles.AccesoContainer}>
           <h3>Registrarse</h3>
           <form
-            onSubmit={RegisterForm.handleSubmit(SendRegister)}
+            onSubmit={RegisterForm.handleSubmit(sendRegister)}
             id={styles.FormLogin}
           >
             <fieldset>
-              <label htmlFor="">Nombre</label>
+              <label htmlFor="">Nombre Completo</label>
               <input
                 {...RegisterForm.register("name")}
                 type="text"
@@ -46,25 +72,6 @@ const Register = () => {
               {RegisterForm.formState.errors.name && (
                 <p className={styles.error}>
                   {RegisterForm.formState.errors.name.message}
-                </p>
-              )}
-            </fieldset>
-            <fieldset>
-              <label htmlFor="">Apellido</label>
-              <input
-                {...RegisterForm.register("lastname")}
-                type="text"
-                placeholder="Ingresa su apellido"
-                className={
-                  !RegisterForm.getFieldState("lastname").invalid &&
-                  RegisterForm.getFieldState("lastname").isTouched
-                    ? styles.valid
-                    : ""
-                }
-              />
-              {RegisterForm.formState.errors.lastname && (
-                <p className={styles.error}>
-                  {RegisterForm.formState.errors.lastname.message}
                 </p>
               )}
             </fieldset>
@@ -106,10 +113,21 @@ const Register = () => {
                 </p>
               )}
             </fieldset>
-            <button id={styles.BtnLogin}>
-              <NavLink to="/acceso">Registrarse</NavLink>
+            {RegisterForm.formState.errors.root && (
+              <p className={styles.error}>
+                {RegisterForm.formState.errors.root.message}
+              </p>
+            )}
+            <button
+              id={styles.BtnLogin}
+              disabled={RegisterForm.formState.isSubmitting}
+            >
+              Registrarse
             </button>
           </form>
+          <nav>
+            <NavLink to="/login">¿Ya tienes una cuenta? Inicia sesión</NavLink>
+          </nav>
         </section>
       </main>
     </Fragment>

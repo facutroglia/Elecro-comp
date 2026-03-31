@@ -1,11 +1,14 @@
 import { Fragment } from "react";
-import { data, NavLink } from "react-router";
+import { useNavigate, NavLink } from "react-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import styles from "../styles/pages/Acceso.module.css";
+import { useUser } from "../context/useUser";
 
 const Acceso = () => {
+  const navigate = useNavigate();
+  const { setUser } = useUser();
   const AccesoSchema = z.object({
     email: z.string().email("Email no valido"),
     password: z.string().min(3, "Constraseña incorrecta"),
@@ -17,7 +20,25 @@ const Acceso = () => {
       password: "",
     },
   });
-  const SendAcceso = (data) => {};
+  const SendAcceso = async (data) => {
+    try {
+      const request = await fetch("/api/usuarios/verificar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const response = await request.json();
+      if (!request.ok) {
+        throw new Error(response.error || "Error al iniciar sesion");
+      }
+      setUser(response);
+      navigate("/");
+    } catch (error) {
+      AccesoForm.setError("root", { message: error.message });
+    }
+  };
   return (
     <Fragment>
       <main id={styles.Container}>
@@ -65,8 +86,16 @@ const Acceso = () => {
                 </p>
               )}
             </fieldset>
-            <button id={styles.BtnLogin}>
-              <NavLink to="/home">Iniciar secion</NavLink>
+            {AccesoForm.formState.errors.root && (
+              <p className={styles.error}>
+                {AccesoForm.formState.errors.root.message}
+              </p>
+            )}
+            <button
+              id={styles.BtnLogin}
+              disabled={AccesoForm.formState.isSubmitting}
+            >
+              Iniciar secion
             </button>
           </form>
           <p>

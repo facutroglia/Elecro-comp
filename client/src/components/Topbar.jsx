@@ -1,12 +1,13 @@
 import { Fragment } from "react";
 import { Icon } from "@iconify/react";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import Brand from "./Brand";
 import Search from "./Search";
 import styles from "../styles/components/TopBar.module.css";
 import { useUser } from "../context/useUser";
 const Topbar = () => {
-  const { user } = useUser();
+  const navigate = useNavigate();
+  const { user, setUser } = useUser();
   return (
     <header id={styles.topbar}>
       <NavLink to={"/"} id={styles.brand}>
@@ -39,6 +40,17 @@ const Topbar = () => {
           <NavLink to={"/carrito"}>
             <Icon icon="mdi:cart" />
           </NavLink>
+        )}
+        {user && (
+          <button
+            onClick={() => {
+              setUser(null);
+              navigate("/acceso");
+            }}
+            id={styles.logout}
+          >
+            <Icon icon="material-symbols:logout" />
+          </button>
         )}
       </nav>
     </header>
