@@ -19,7 +19,12 @@ const Cart = lazy(() => import("./pages/Cart"));
 const Profile = lazy(() => import("./pages/Profile"));
 const Orders = lazy(() => import("./pages/Orders"));
 const Checkout = lazy(() => import("./pages/Checkout"));
-const Dashboard = lazy(() => import("./pages/Dashboard"));
+
+// Admin Pages
+const Dashboard = lazy(() => import("./pages/Admin/Dashboard"));
+const AdminCategory = lazy(() => import("./pages/Admin/Category"));
+const AdminBrand = lazy(() => import("./pages/Admin/Brand"));
+const AdminProducts = lazy(() => import("./pages/Admin/Products"));
 // Services
 import {
   allProductsAdmins,
@@ -160,6 +165,30 @@ export const App = createBrowserRouter([
             element: (
               <Loader>
                 <Dashboard />
+              </Loader>
+            ),
+          },
+          {
+            path: "categorias",
+            element: (
+              <Loader>
+                <AdminCategory />
+              </Loader>
+            ),
+          },
+          {
+            path: "marcas",
+            element: (
+              <Loader>
+                <AdminBrand />
+              </Loader>
+            ),
+          },
+          {
+            path: "productos",
+            element: (
+              <Loader>
+                <AdminProducts />
               </Loader>
             ),
           },

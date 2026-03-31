@@ -14,6 +14,11 @@ export default defineConfig(({ mode }) => {
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, ""),
         },
+        "/assets": {
+          target: env.VITE_BACKEND_PUBLIC || "http://localhost:3000/public/",
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/assets/, ""),
+        },
       },
     },
   };

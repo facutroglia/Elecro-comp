@@ -1,0 +1,17 @@
+#overlay {
+  position: fixed;
+  width: 100dvw;
+  height: 100dvh;
+  z-index: 9;
+  background-color: var(--soft-01);
+}
+#confirm {
+  position: fixed;
+  z-index: 10;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--white);
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
