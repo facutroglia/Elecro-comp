@@ -5,32 +5,32 @@ const Dashboard = () => {
   return (
     <Fragment>
       <Template title={"Panel | Administración"}>
-        <ul>
-          <li>
+        <ul className={styles.DashboardContainer}>
+          <li className={styles.ListDashboard}>
             <dl>
               <dt>Productos</dt>
               <dd>12</dd>
             </dl>
           </li>
-          <li>
+          <li className={styles.ListDashboard}>
             <dl>
               <dt>Usuarios</dt>
               <dd>3</dd>
             </dl>
           </li>
-          <li>
+          <li className={styles.ListDashboard}>
             <dl>
               <dt>Pedidos</dt>
               <dd>5</dd>
             </dl>
           </li>
-          <li>
+          <li className={styles.ListDashboard}>
             <dl>
               <dt>Categorias</dt>
               <dd>4</dd>
             </dl>
           </li>
-          <li>
+          <li className={styles.ListDashboard}>
             <dl>
               <dt>Marcas</dt>
               <dd>4</dd>

@@ -1,0 +1,38 @@
+.DashboardContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.ListDashboard {
+  border-left: 4px solid var(--primary);
+  background: var(--white);
+  padding: 1rem;
+  border-radius: 1rem;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.ListDashboard:hover {
+  transform: translateY(-5px);
+}
+
+.ListDashboard dl {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ListDashboard dt {
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: var(--soft-04);
+  font-weight: 700;
+}
+
+.ListDashboard dd {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--black);
+}

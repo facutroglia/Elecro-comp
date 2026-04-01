@@ -7,10 +7,18 @@ const Template = ({ title, children }) => {
       <header id={styles.header}>
         <h2 id={styles.title}>{title}</h2>
         <nav id={styles.actions}>
-          <NavLink to="/panel/productos">Productos</NavLink>
-          <NavLink to="/panel/categorias">Categorias</NavLink>
-          <NavLink to="/panel/marcas">Marcas</NavLink>
-          <NavLink to="/panel/pedidos">Pedidos</NavLink>
+          <NavLink className={styles.NavLinks} to="/panel/productos">
+            Productos
+          </NavLink>
+          <NavLink className={styles.NavLinks} to="/panel/categorias">
+            Categorias
+          </NavLink>
+          <NavLink className={styles.NavLinks} to="/panel/marcas">
+            Marcas
+          </NavLink>
+          <NavLink className={styles.NavLinks} to="/panel/pedidos">
+            Pedidos
+          </NavLink>
         </nav>
       </header>
       {children}

@@ -1,4 +1,5 @@
 import { useState, useEffect, Fragment, useRef } from "react";
+import styles from "../styles/components/CategoryCard.module.css";
 import { useForm } from "react-hook-form";
 import CategoryRemove from "./CategoryRemove";
 const CategoryCard = ({ category }) => {
@@ -90,29 +91,36 @@ const CategoryCard = ({ category }) => {
     }
   };
   return (
-    <li>
+    <li className={styles.LiCards}>
       {!edit && (
         <Fragment>
           {category?.iconId && (
-            <picture>
+            <picture className={styles.ImgCategory}>
               <img
                 src={`/assets/${category?.icon?.url}`}
                 alt={`${category.name} icon`}
               />
             </picture>
           )}
-          <dl>
+          <dl className={styles.InfoCategory}>
             <dt>{category.name}</dt>
             <dd>Productos: {category?.products?.length || 0}</dd>
           </dl>
-          <button onClick={() => setEdit(true)}>Editar</button>
+          <button className={styles.BtnEditSave} onClick={() => setEdit(true)}>
+            Editar
+          </button>
           <CategoryRemove category={category} />
         </Fragment>
       )}
       {edit && (
-        <form onSubmit={editForm.handleSubmit(EditCategory)}>
-          <fieldset>
-            <label htmlFor="name">Nombre</label>
+        <form
+          className={styles.EditForm}
+          onSubmit={editForm.handleSubmit(EditCategory)}
+        >
+          <fieldset className={styles.FieldsetEdit}>
+            <label className={styles.LabelEdit} htmlFor="name">
+              Nombre
+            </label>
             <input
               id="name"
               {...editForm.register("name", { required: true })}
@@ -122,7 +130,7 @@ const CategoryCard = ({ category }) => {
             )}
           </fieldset>
           <fieldset>
-            <label htmlFor="iconEdit">
+            <label className={styles.InputIcon} htmlFor="iconEdit">
               {!category?.iconId
                 ? "Subir icono"
                 : fileInput?.[0]
@@ -140,10 +148,18 @@ const CategoryCard = ({ category }) => {
               <p>{editForm.formState.errors.icon.message}</p>
             )}
           </fieldset>
-          <button type="submit" disabled={editForm.formState.isSubmitting}>
+          <button
+            className={styles.BtnEditSave}
+            type="submit"
+            disabled={editForm.formState.isSubmitting}
+          >
             Guardar
           </button>
-          <button type="button" onClick={() => setEdit(false)}>
+          <button
+            className={styles.BtnRemove}
+            type="button"
+            onClick={() => setEdit(false)}
+          >
             Cancelar
           </button>
         </form>

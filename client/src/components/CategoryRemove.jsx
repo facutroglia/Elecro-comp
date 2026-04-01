@@ -47,16 +47,26 @@ const CategoryRemove = ({ category }) => {
   return (
     <form onSubmit={(e) => e.preventDefault()}>
       <button type="button" onClick={() => setShow(true)}>
-        Remove
+        Eliminar
       </button>
       {show && (
         <div id={styles.overlay} onClick={() => setShow(false)}>
           <div id={styles.confirm}>
-            <p>Estas seguro de eleminar esta categoria?</p>
-            <button type="button" onClick={() => setConfirm(true)}>
+            <p className={styles.textConfirm}>
+              Estas seguro de eleminar esta categoria?
+            </p>
+            <button
+              className={styles.BtnConfirm}
+              type="button"
+              onClick={() => setConfirm(true)}
+            >
               Si
             </button>
-            <button type="button" onClick={() => setShow(false)}>
+            <button
+              className={styles.BtnConfirm}
+              type="button"
+              onClick={() => setShow(false)}
+            >
               No
             </button>
           </div>

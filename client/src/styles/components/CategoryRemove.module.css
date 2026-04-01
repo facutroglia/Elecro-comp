@@ -8,10 +8,21 @@
 #confirm {
   position: fixed;
   z-index: 10;
+
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: var(--white);
   padding: 1rem;
   border-radius: 0.5rem;
+  border: solid 1px var(--black);
+  box-shadow: 0 10px 15px -3px var(--black);
+}
+.textConfirm {
+  color: var(--black);
+}
+
+.BtnConfirm:hover {
+  background-color: #2563eb;
+  color: var(--white);
 }

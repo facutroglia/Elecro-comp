@@ -1,0 +1,93 @@
+.LiCards {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+}
+.ImgCategory {
+  width: 60px;
+  height: 60px;
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ImgCategory img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.InfoCategory dt {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--black);
+}
+.InfoCategory dd {
+  font-size: 0.9rem;
+  color: var(--gray);
+  margin-top: 0.25rem;
+}
+.EditForm {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+}
+.FieldsetEdit {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.LabelEdit {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.InputText {
+  padding: 0.6rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.InputIcon {
+  display: inline-block;
+  padding: 0.5rem;
+  color: var(--gray);
+  border: 2px dashed #cbd5e1;
+  border-radius: 6px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 0.5rem;
+}
+.InputIcon:hover {
+  background: #e2e8f0;
+  border-color: #94a3b8;
+}
+.BtnEditSave {
+  background-color: #2563eb;
+  color: white;
+}
+.BtnEditSave:hover {
+  background-color: #1d4ed8;
+}
+.BtnRemove {
+  background-color: #f1f5f9;
+  color: #475569;
+}
+.BtnRemove:hover {
+  background-color: #e2e8f0;
+}
+button {
+  cursor: pointer;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
