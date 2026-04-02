@@ -5,24 +5,46 @@
   z-index: 9;
   background-color: var(--soft-01);
 }
+
+.BtnDelete {
+  width: 100%;
+  cursor: pointer;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.2s;
+  background-color: var(--Btn-02);
+  color: var(--gray-02);
+}
+.BtnDelete:hover {
+  background-color: var(--Btn-02-hover);
+}
 #confirm {
   position: fixed;
   z-index: 10;
-
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: var(--white);
-  padding: 1rem;
+  padding: 2rem;
   border-radius: 0.5rem;
   border: solid 1px var(--black);
   box-shadow: 0 10px 15px -3px var(--black);
 }
 .textConfirm {
   color: var(--black);
+  margin-bottom: 1rem;
 }
 
+.BtnConfirm {
+  cursor: pointer;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.2s;
+  margin-right: 0.5rem;
+}
 .BtnConfirm:hover {
-  background-color: #2563eb;
+  background-color: var(--Btn-01);
   color: var(--white);
 }

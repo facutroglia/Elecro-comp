@@ -45,8 +45,12 @@ const CategoryRemove = ({ category }) => {
     }
   }, [confirm]);
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
-      <button type="button" onClick={() => setShow(true)}>
+    <form className={styles.FormDelete} onSubmit={(e) => e.preventDefault()}>
+      <button
+        className={styles.BtnDelete}
+        type="button"
+        onClick={() => setShow(true)}
+      >
         Eliminar
       </button>
       {show && (

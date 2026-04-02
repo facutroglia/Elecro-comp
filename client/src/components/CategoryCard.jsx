@@ -122,6 +122,7 @@ const CategoryCard = ({ category }) => {
               Nombre
             </label>
             <input
+              className={styles.InputText}
               id="name"
               {...editForm.register("name", { required: true })}
             />

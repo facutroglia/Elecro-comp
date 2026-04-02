@@ -43,23 +43,24 @@
   gap: 0.5rem;
 }
 .LabelEdit {
-  font-size: 0.85rem;
+  font-size: 1rem;
   font-weight: 600;
-  color: #475569;
+  color: var(--gray-02);
 }
 
 .InputText {
   padding: 0.6rem;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--gray);
   border-radius: 6px;
   font-size: 1rem;
 }
 
 .InputIcon {
+  width: 100%;
   display: inline-block;
   padding: 0.5rem;
   color: var(--gray);
-  border: 2px dashed #cbd5e1;
+  border: 2px dashed var(--gray);
   border-radius: 6px;
   text-align: center;
   cursor: pointer;
@@ -67,27 +68,30 @@
   margin-bottom: 0.5rem;
 }
 .InputIcon:hover {
-  background: #e2e8f0;
-  border-color: #94a3b8;
+  background: var(--gray-03);
+  border-color: var(--gray);
 }
 .BtnEditSave {
-  background-color: #2563eb;
-  color: white;
-}
-.BtnEditSave:hover {
-  background-color: #1d4ed8;
-}
-.BtnRemove {
-  background-color: #f1f5f9;
-  color: #475569;
-}
-.BtnRemove:hover {
-  background-color: #e2e8f0;
-}
-button {
   cursor: pointer;
   padding: 0.6rem 1rem;
   border-radius: 6px;
   font-weight: 600;
   transition: all 0.2s;
+  background-color: var(--Btn-01);
+  color: white;
+}
+.BtnEditSave:hover {
+  background-color: var(--Btn-01-hover);
+}
+.BtnRemove {
+  cursor: pointer;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.2s;
+  background-color: var(--Btn-02);
+  color: var(--gray-02);
+}
+.BtnRemove:hover {
+  background-color: var(--Btn-02-hover);
 }

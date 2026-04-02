@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { useForm } from "react-hook-form";
+import styles from "../styles/components/CategoryAdd.module.css";
 const CategoryAdd = () => {
   const addForm = useForm({
     defaultValues: {
@@ -58,16 +59,26 @@ const CategoryAdd = () => {
     }
   };
   return (
-    <form onSubmit={addForm.handleSubmit(createCategory)}>
-      <fieldset>
-        <label htmlFor="name">Nombre</label>
-        <input id="name" {...addForm.register("name", { required: true })} />
+    <form
+      className={styles.FormContainer}
+      onSubmit={addForm.handleSubmit(createCategory)}
+    >
+      <h3>Añadir Categoria</h3>
+      <fieldset className={styles.AddContent}>
+        <label className={styles.LabelName} htmlFor="name">
+          Nombre de la categoria
+        </label>
+        <input
+          className={styles.AddInput}
+          id="name"
+          {...addForm.register("name", { required: true })}
+        />
         {addForm.formState.errors.name && (
           <p>{addForm.formState.errors.name.message}</p>
         )}
       </fieldset>
       <fieldset>
-        <label htmlFor="iconAdd">
+        <label id={styles.AddLabel} htmlFor="iconAdd">
           {fileInput?.[0] ? "Cambiar icono" : "Subir icono"}
         </label>
         <input
@@ -81,10 +92,15 @@ const CategoryAdd = () => {
           <p>{addForm.formState.errors.icon.message}</p>
         )}
       </fieldset>
-      <button type="submit" disabled={addForm.formState.isSubmitting}>
+      <button
+        className={styles.BtnAdd}
+        type="submit"
+        disabled={addForm.formState.isSubmitting}
+      >
         Guardar
       </button>
       <button
+        className={styles.BtnCancel}
         type="button"
         onClick={() => addForm.reset()}
         disabled={addForm.formState.isSubmitting}
