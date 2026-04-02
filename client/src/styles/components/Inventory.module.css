@@ -1,0 +1,112 @@
+.InventoryList {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Cada "Fila" de Producto */
+.InventoryList li {
+  background: #ffffff;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  border: 1px solid #f1f5f9;
+  display: grid;
+  grid-template-columns: 80px 2fr 1fr 1fr 100px;
+  align-items: center;
+  gap: 1.5rem;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.InventoryList li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+  border-color: #e2e8f0;
+}
+
+.InventoryList picture {
+  width: 80px;
+  height: 80px;
+  background: #f8fafc;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #f1f5f9;
+}
+
+.InventoryList img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.InventoryList dt {
+  font-weight: 700;
+  color: #1e293b;
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+}
+
+.InventoryList dd {
+  margin: 0;
+  color: #2563eb;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.BadgeContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.Badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: #f1f5f9;
+  color: #475569;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+/* Botón Editar (Link) */
+.EditLink {
+  text-decoration: none;
+  background-color: #f1f5f9;
+  color: #475569;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.EditLink:hover {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+/* Responsividad para pantallas chicas */
+@media (max-width: 768px) {
+  .InventoryList li {
+    grid-template-columns: 80px 1fr 1fr;
+    gap: 1rem;
+  }
+
+  /* Escondemos las etiquetas o el link en mobile para que no explote */
+  .InventoryList li > dl:nth-of-type(2) {
+    display: none;
+  }
+}
