@@ -6,6 +6,7 @@ import categoryRoutes from "./src/category/category.routes.js";
 import productRoutes from "./src/product/product.routes.js";
 import orderRoutes from "./src/order/order.routes.js";
 import itemRoutes from "./src/item/item.routes.js";
+import brandRoutes from "./src/brand/brand.routes.js";
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use("/api/categorias", categoryRoutes);
 app.use("/api/productos", productRoutes);
 app.use("/api/ordenes", orderRoutes);
 app.use("/api/items", itemRoutes);
+app.use("/api/marcas", brandRoutes);
 
 app.listen(app.get("port"), () => {
   console.log(`Server is running on port ${app.get("port")}`);

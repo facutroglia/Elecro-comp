@@ -1,20 +1,20 @@
 import { Fragment } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
-import styles from "../styles/components/CategoryAdd.module.css";
-const CategoryAdd = () => {
+import styles from "../styles/components/BrandAdd.module.css";
+const BrandAdd = () => {
   const navigate = useNavigate();
   const addForm = useForm({
     defaultValues: {
       name: "",
-      icon: null,
+      logo: null,
     },
   });
-  const fileInput = addForm.watch("icon");
-  const createCategory = async (data) => {
+  const fileInput = addForm.watch("logo");
+  const createBrand = async (data) => {
     if (!fileInput?.[0]) {
       try {
-        const req = await fetch("/api/categorias/", {
+        const req = await fetch("/api/marcas/", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -24,10 +24,10 @@ const CategoryAdd = () => {
           }),
         });
         const createdCategory = await req.json();
-        console.log("Categoría nueva:", createdCategory);
+        console.log("Marca nueva:", createdCategory);
         navigate(0);
       } catch (error) {
-        console.error("Error al actualizar la categoría:", error);
+        console.error("Error al actualizar la marca:", error);
       }
     }
     if (fileInput?.[0]) {
@@ -35,25 +35,25 @@ const CategoryAdd = () => {
         const formData = new FormData();
         formData.append("name", data.name);
         formData.append("icon", fileInput?.[0]);
-        formData.append("type", "category");
+        formData.append("type", "brand");
         const reqFile = await fetch("/api/archivos/", {
           method: "POST",
           body: formData,
         });
         const fileData = await reqFile.json();
         console.log("Archivo subido:", fileData);
-        const req = await fetch("/api/categorias/", {
+        const req = await fetch("/api/marcas/", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
             name: data.name,
-            iconId: fileData.id,
+            logoId: fileData.id,
           }),
         });
-        const createdCategory = await req.json();
-        console.log("Categoría nueva:", createdCategory);
+        const createdBrand = await req.json();
+        console.log("Marca nueva:", createdBrand);
         navigate(0);
       } catch (error) {
         console.error("Error al actualizar la categoría:", error);
@@ -63,12 +63,12 @@ const CategoryAdd = () => {
   return (
     <form
       className={styles.FormContainer}
-      onSubmit={addForm.handleSubmit(createCategory)}
+      onSubmit={addForm.handleSubmit(createBrand)}
     >
-      <h3>Añadir Categoria</h3>
+      <h3>Añadir Marca</h3>
       <fieldset className={styles.AddContent}>
         <label className={styles.LabelName} htmlFor="name">
-          Nombre de la categoria
+          Nombre de la Marca
         </label>
         <input
           className={styles.AddInput}
@@ -80,14 +80,14 @@ const CategoryAdd = () => {
         )}
       </fieldset>
       <fieldset>
-        <label id={styles.AddLabel} htmlFor="iconAdd">
-          {fileInput?.[0] ? "Cambiar icono" : "Subir icono"}
+        <label id={styles.AddLabel} htmlFor="logoAdd">
+          {fileInput?.[0] ? "Cambiar Logo" : "Subir Logo"}
         </label>
         <input
           type="file"
           accept="image/*"
-          id="iconAdd"
-          {...addForm.register("icon")}
+          id="logoAdd"
+          {...addForm.register("logo")}
           style={{ display: "none" }}
         />
         {addForm.formState.errors.icon && (
@@ -113,4 +113,4 @@ const CategoryAdd = () => {
   );
 };
 
-export default CategoryAdd;
+export default BrandAdd;

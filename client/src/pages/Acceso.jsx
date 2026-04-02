@@ -1,5 +1,5 @@
-import { Fragment } from "react";
-import { useNavigate, NavLink } from "react-router";
+import { Fragment, useEffect } from "react";
+import { useNavigate, NavLink, Navigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -8,7 +8,7 @@ import { useUser } from "../context/useUser";
 
 const Acceso = () => {
   const navigate = useNavigate();
-  const { setUser } = useUser();
+  const { user, setUser } = useUser();
   const AccesoSchema = z.object({
     email: z.string().email("Email no valido"),
     password: z.string().min(3, "Constraseña incorrecta"),
@@ -39,6 +39,14 @@ const Acceso = () => {
       AccesoForm.setError("root", { message: error.message });
     }
   };
+
+  if (user && user?.isAdmin) {
+    return <Navigate to={"/panel"} />;
+  }
+  if (user) {
+    return <Navigate to={"/"} />;
+  }
+
   return (
     <Fragment>
       <main id={styles.Container}>

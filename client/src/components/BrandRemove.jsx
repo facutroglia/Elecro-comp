@@ -1,33 +1,33 @@
 import { useState, useEffect, Fragment } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
-import styles from "../styles/components/CategoryRemove.module.css";
-const CategoryRemove = ({ category }) => {
+import styles from "../styles/components/BrandRemove.module.css";
+const BrandRemove = ({ brand }) => {
   const navigate = useNavigate();
   const removeForm = useForm();
   const [confirm, setConfirm] = useState(false);
   const [show, setShow] = useState(false);
   const remove = async (data) => {
     try {
-      if (category.iconId) {
+      if (brand.logoId) {
         const reqFile = await fetch("/api/archivos", {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ id: category.iconId }),
+          body: JSON.stringify({ id: brand.logoId }),
         });
         const resFile = await reqFile.json();
         if (!reqFile.ok) {
           throw new Error(resFile.error || "Failed to fetch files");
         }
       }
-      const req = await fetch("/api/categorias/", {
+      const req = await fetch("/api/marcas/", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ id: category.id }),
+        body: JSON.stringify({ id: brand.id }),
       });
       const res = await req.json();
       if (!req.ok) {
@@ -56,7 +56,7 @@ const CategoryRemove = ({ category }) => {
         <div id={styles.overlay} onClick={() => setShow(false)}>
           <div id={styles.confirm}>
             <p className={styles.textConfirm}>
-              Estas seguro de eleminar esta categoria?
+              Estas seguro de eleminar esta marca?
             </p>
             <div className={styles.Btns}>
               <button
@@ -81,4 +81,4 @@ const CategoryRemove = ({ category }) => {
   );
 };
 
-export default CategoryRemove;
+export default BrandRemove;

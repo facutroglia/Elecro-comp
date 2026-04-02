@@ -1,0 +1,45 @@
+.LiCards {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+}
+
+.ImgBrand {
+  width: auto;
+  height: 3rem;
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ImgBrand img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.InfoBrand dt {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--black);
+}
+.InfoBrand dd {
+  font-size: 0.9rem;
+  color: var(--gray);
+  margin-top: 0.25rem;
+}
+.BtnEditSave {
+  cursor: pointer;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.2s;
+  background-color: var(--Btn-01);
+  color: var(---white);
+}
+.BtnEditSave:hover {
+  background-color: var(--Btn-01-hover);
+}

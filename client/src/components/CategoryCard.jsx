@@ -1,9 +1,11 @@
 import { useState, useEffect, Fragment, useRef } from "react";
-import styles from "../styles/components/CategoryCard.module.css";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
+import styles from "../styles/components/CategoryCard.module.css";
 import CategoryRemove from "./CategoryRemove";
 const CategoryCard = ({ category }) => {
   const [edit, setEdit] = useState(false);
+  const navigate = useNavigate();
   const editForm = useForm({
     defaultValues: {
       name: category.name,
@@ -27,6 +29,7 @@ const CategoryCard = ({ category }) => {
         const updatedCategory = await req.json();
         console.log("Categoría actualizada:", updatedCategory);
         setEdit(false);
+        navigate(0);
       } catch (error) {
         console.error("Error al actualizar la categoría:", error);
       }
@@ -56,6 +59,7 @@ const CategoryCard = ({ category }) => {
         const updatedCategory = await req.json();
         console.log("Categoría actualizada:", updatedCategory);
         setEdit(false);
+        navigate(0);
       } catch (error) {
         console.error("Error al actualizar la categoría:", error);
       }

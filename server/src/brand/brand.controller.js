@@ -1,4 +1,4 @@
-import prisma from "../libs/prisma";
+import prisma from "../libs/prisma.js";
 
 export const getBrands = async (req, res) => {
   try {
@@ -32,8 +32,7 @@ export const createBrand = async (req, res) => {
 };
 
 export const updateBrand = async (req, res) => {
-  const { id } = req.params;
-  const { name, logoId } = req.body;
+  const { name, logoId, id } = req.body;
   try {
     const updated = await prisma.brand.update({
       where: { id },
@@ -46,17 +45,15 @@ export const updateBrand = async (req, res) => {
 };
 
 export const deleteBrand = async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.body;
   try {
     await prisma.brand.delete({
       where: { id },
     });
     res.status(204).send();
   } catch (error) {
-    res
-      .status(400)
-      .json({
-        error: "No se puede borrar: la marca tiene productos asociados.",
-      });
+    res.status(400).json({
+      error: "No se puede borrar: la marca tiene productos asociados.",
+    });
   }
 };

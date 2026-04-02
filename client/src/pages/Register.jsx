@@ -1,12 +1,12 @@
 import { Fragment } from "react";
-import { useNavigate, NavLink } from "react-router";
+import { useNavigate, NavLink, Navigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useUser } from "../context/useUser";
 import styles from "../styles/pages/Register.module.css";
 const Register = () => {
-  const { setUser } = useUser();
+  const { user, setUser } = useUser();
   const navigate = useNavigate();
   const RegisterSchema = z.object({
     name: z.string().min(3, "Minimo 3 caracteres"),
@@ -47,6 +47,13 @@ const Register = () => {
       });
     }
   };
+
+  if (user && user?.isAdmin) {
+    return <Navigate to={"/panel"} />;
+  }
+  if (user) {
+    return <Navigate to={"/"} />;
+  }
   return (
     <Fragment>
       <main id={styles.Container}>

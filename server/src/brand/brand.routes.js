@@ -4,12 +4,12 @@ import {
   createBrand,
   updateBrand,
   deleteBrand,
-} from "./brand.controller";
+} from "./brand.controller.js";
 const router = Router();
 
 router.get("/", getBrands);
 router.post("/", createBrand);
-router.put("/:id", updateBrand);
-router.delete("/:id", deleteBrand);
+router.put("/", updateBrand);
+router.delete("/", deleteBrand);
 
 export default router;
