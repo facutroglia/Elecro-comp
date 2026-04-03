@@ -8,10 +8,19 @@ const CategoryNav = () => {
   const location = useLocation();
   const [openMenu, setOpenMenu] = useState(false);
   const [openCategory, setOpenCategory] = useState(false);
+  const [categorias, setCategorias] = useState([]);
   useEffect(() => {
     setOpenMenu(false);
     setOpenCategory(false);
   }, [location]);
+  useEffect(() => {
+    const getCategories = async () => {
+      const request = await fetch("/api/categorias");
+      const response = await request.json();
+      setCategorias(response);
+    };
+    getCategories();
+  }, []);
   return (
     <header id={styles.NavCategory}>
       <form onSubmit={(e) => e.preventDefault()} className={styles.actions}>
@@ -87,42 +96,14 @@ const CategoryNav = () => {
         </nav>
       )}
       <nav id={styles.categories} className={openCategory ? styles.open : null}>
-        <NavLink to="/productos/categoria/procesador">
-          {!isMobile && (
-            <img
-              src="https://placehold.co/72/36013F/violet/png?text=Pc"
-              alt=""
-            />
-          )}
-          <span>Procesador</span>
-        </NavLink>
-        <NavLink to="/productos/categoria/memorias">
-          {!isMobile && (
-            <img
-              src="https://placehold.co/72/36013F/violet/png?text=Mr"
-              alt=""
-            />
-          )}
-          <span>Memorias</span>
-        </NavLink>
-        <NavLink to="/productos/categoria/placas">
-          {!isMobile && (
-            <img
-              src="https://placehold.co/72/36013F/violet/png?text=Pl"
-              alt=""
-            />
-          )}
-          <span>Placas</span>
-        </NavLink>
-        <NavLink to="/productos/categoria/graficas">
-          {!isMobile && (
-            <img
-              src="https://placehold.co/72/36013F/violet/png?text=Gf"
-              alt=""
-            />
-          )}
-          <span>Graficas</span>
-        </NavLink>
+        {categorias.map((categoria) => (
+          <NavLink to={`/productos/categoria/${categoria.name}`}>
+            {!isMobile && categoria.iconId && (
+              <img src={`/assets/${categoria.icon.url}`} alt="" />
+            )}
+            <span>{categoria.name.toUpperCase()}</span>
+          </NavLink>
+        ))}
       </nav>
     </header>
   );

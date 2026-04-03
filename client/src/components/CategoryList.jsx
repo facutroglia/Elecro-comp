@@ -1,21 +1,7 @@
 import { useState, useEffect, Fragment } from "react";
 import CategoryCard from "./CategoryCard";
 import styles from "../styles/components/CategoryList.module.css";
-const CategoryList = () => {
-  const [categorias, setCategorias] = useState([]);
-
-  useEffect(() => {
-    const getCategorias = async () => {
-      try {
-        const response = await fetch("/api/categorias");
-        const data = await response.json();
-        setCategorias(data);
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      }
-    };
-    getCategorias();
-  }, []);
+const CategoryList = ({ categorias }) => {
   return (
     <Fragment>
       {!categorias || (categorias.length < 1 && <p>No hay categorias</p>)}

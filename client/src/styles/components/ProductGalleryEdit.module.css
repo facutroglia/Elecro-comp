@@ -1,0 +1,95 @@
+.GalleryEditContainer {
+  background: var(--white);
+  padding: 1rem;
+  border-radius: 12px;
+}
+
+.GalleryEditContainer h3 {
+  margin: 0 0 1.5rem 0;
+  color: var(--black);
+  font-size: 1.25rem;
+  border-bottom: 2px solid var(--white-02);
+  padding-bottom: 0.75rem;
+}
+
+.FromGalleryEdit {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  background: #f8fafc;
+  padding: 1.5rem;
+  border-radius: 10px;
+  border: 2px dashed #cbd5e1;
+  transition: border-color 0.2s;
+}
+
+.FromGalleryEdit:hover {
+  border-color: var(--Btn-01);
+}
+
+.FromGalleryEdit label {
+  background-color: var(--white);
+  color: var(--gray);
+  border: 1px solid var(--gray-03);
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  align-items: center;
+}
+
+.FromGalleryEdit label:hover {
+  background-color: var(--white-02);
+  border-color: var(--gray);
+}
+
+.FromGalleryEdit button {
+  background-color: var(--Btn-01);
+  color: var(--white);
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.FromGalleryEdit button:hover:not(:disabled) {
+  background-color: var(--Btn-01-hover);
+}
+
+.FromGalleryEdit button:disabled {
+  background-color: var(--gray);
+  cursor: not-allowed;
+}
+
+.GalleryEditContainer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1.5rem;
+}
+
+@media (max-width: 600px) {
+  .FromGalleryEdit {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .FromGalleryEdit label,
+  .FromGalleryEdit button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .GalleryEditContainer ul {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1rem;
+  }
+}

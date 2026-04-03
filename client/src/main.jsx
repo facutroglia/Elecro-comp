@@ -12,14 +12,14 @@ const $root = $("root");
 const root = createRoot($root);
 root.render(
   <Fragment>
-    <FavoritesProvider>
-      <UserProvider>
+    <UserProvider>
+      <FavoritesProvider>
         <CartProvider>
           <MobileProvider>
             <RouterProvider router={App} />
           </MobileProvider>
         </CartProvider>
-      </UserProvider>
-    </FavoritesProvider>
+      </FavoritesProvider>
+    </UserProvider>
   </Fragment>,
 );

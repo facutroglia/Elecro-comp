@@ -25,13 +25,18 @@ const Dashboard = lazy(() => import("./pages/Admin/Dashboard"));
 const AdminCategory = lazy(() => import("./pages/Admin/Category"));
 const AdminBrand = lazy(() => import("./pages/Admin/Brand"));
 const AdminProducts = lazy(() => import("./pages/Admin/Products"));
+const AdminProductEdit = lazy(() => import("./pages/Admin/EditProduct"));
 // Services
 import {
   allProductsAdmins,
   allProductsCustomers,
   allProductsByCategory,
   oneProduct,
+  oneProductEdit,
 } from "./services/ProductLoader";
+import { allCategories } from "./services/CategoryLoader";
+import { allBrands } from "./services/BrandsLoader";
+import { allMetrics } from "./services/AdminLoader";
 import Favorites from "./pages/Favorites";
 export const App = createBrowserRouter([
   {
@@ -76,12 +81,12 @@ export const App = createBrowserRouter([
       // loader: allProductsCustomers,
       {
         path: "productos/categoria/:categoria",
+        loader: allProductsByCategory,
         element: (
           <Loader>
             <Category />
           </Loader>
         ),
-        // loader: allProductsByCategory,
       },
       {
         path: "productos/:id",
@@ -161,7 +166,7 @@ export const App = createBrowserRouter([
         children: [
           {
             index: true,
-            //loader: allProductsAdmins,
+            loader: allMetrics,
             element: (
               <Loader>
                 <Dashboard />
@@ -170,6 +175,7 @@ export const App = createBrowserRouter([
           },
           {
             path: "categorias",
+            loader: allCategories,
             element: (
               <Loader>
                 <AdminCategory />
@@ -178,6 +184,7 @@ export const App = createBrowserRouter([
           },
           {
             path: "marcas",
+            loader: allBrands,
             element: (
               <Loader>
                 <AdminBrand />
@@ -186,9 +193,19 @@ export const App = createBrowserRouter([
           },
           {
             path: "productos",
+            loader: allProductsAdmins,
             element: (
               <Loader>
                 <AdminProducts />
+              </Loader>
+            ),
+          },
+          {
+            path: "productos/:id",
+            loader: oneProductEdit,
+            element: (
+              <Loader>
+                <AdminProductEdit />
               </Loader>
             ),
           },

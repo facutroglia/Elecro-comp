@@ -51,22 +51,124 @@ export const createProduct = async (req, res) => {
   }
 };
 
+export const addImage = async (req, res) => {
+  try {
+    const { productId, fileId } = req.body;
+    if (!productId || !fileId) {
+      return res
+        .status(400)
+        .json({ error: "productId y fileId son campos requeridos" });
+    }
+
+    const product = await prisma.product.findUnique({
+      where: { id: productId },
+    });
+    if (!product) {
+      return res.status(404).json({ error: "Producto no encontrado" });
+    }
+
+    const file = await prisma.file.findUnique({ where: { id: fileId } });
+    if (!file) {
+      return res.status(404).json({ error: "Archivo no encontrado" });
+    }
+
+    const updatedProduct = await prisma.product.update({
+      where: { id: productId },
+      data: {
+        gallery: {
+          connect: { id: fileId },
+        },
+      },
+      include: {
+        category: true,
+        brand: true,
+        gallery: true,
+        atributes: true,
+      },
+    });
+
+    res.json({
+      message: "Imagen agregada al producto exitosamente",
+      product: updatedProduct,
+    });
+  } catch (error) {
+    console.error(error);
+    if (error.code === "P2025") {
+      return res
+        .status(404)
+        .json({ error: "Producto o archivo no encontrado" });
+    }
+    res.status(500).json({ error: "Error interno del servidor" });
+  }
+};
+
+export const removeImage = async (req, res) => {
+  try {
+    const { productId, fileId } = req.body;
+    if (!productId || !fileId) {
+      return res
+        .status(400)
+        .json({ error: "productId y fileId son campos requeridos" });
+    }
+
+    const product = await prisma.product.findUnique({
+      where: { id: productId },
+    });
+    if (!product) {
+      return res.status(404).json({ error: "Producto no encontrado" });
+    }
+
+    const file = await prisma.file.findUnique({ where: { id: fileId } });
+    if (!file) {
+      return res.status(404).json({ error: "Archivo no encontrado" });
+    }
+
+    const updatedProduct = await prisma.product.update({
+      where: { id: productId },
+      data: {
+        gallery: {
+          disconnect: { id: fileId },
+        },
+      },
+      include: {
+        category: true,
+        brand: true,
+        gallery: true,
+        atributes: true,
+      },
+    });
+
+    res.json({
+      message: "Imagen removida de la galería del producto",
+      product: updatedProduct,
+    });
+  } catch (error) {
+    console.error(error);
+    if (error.code === "P2025") {
+      return res
+        .status(404)
+        .json({ error: "Producto o archivo no encontrado" });
+    }
+    res.status(500).json({ error: "Error interno del servidor" });
+  }
+};
+
 export const getProducts = async (req, res) => {
   try {
-    const { search, category, brand, minPrice, maxPrice, page = 1 } = req.query;
+    const { search, category, brand, minPrice, maxPrice, page } = req.query;
 
     const where = {};
     if (search) {
       where.name = { contains: search, mode: "insensitive" };
     }
     if (category) {
-      const categoryRecord = await prisma.category.findUnique({
+      const categoryRecord = await prisma.category.findFirst({
         where: { name: category },
       });
       where.categoryId = categoryRecord ? categoryRecord.id : null;
     }
     if (brand) {
-      const brandRecord = await prisma.brand.findUnique({
+      const brandRecord = await prisma.brand.findFirst({
         where: { name: brand },
       });
       where.brandId = brandRecord ? brandRecord.id : null;
@@ -81,28 +183,23 @@ export const getProducts = async (req, res) => {
       }
     }
 
-    const pageNum = parseInt(page);
-    const limitNum = parseInt("4");
-    if (isNaN(pageNum) || pageNum < 1) {
-      return res
-        .status(400)
-        .json({ error: "Página debe ser un número mayor a 0" });
+    const paginate = {};
+    if (page) {
+      if (isNaN(parseInt(page)) || parseInt(page) < 1) {
+        return res
+          .status(400)
+          .json({ error: "Página debe ser un número mayor a 0" });
+      }
+      paginate.page = parseInt(page);
+      paginate.take = 4;
+      paginate.skip = (pageNum - 1) * paginate.take;
     }
-    if (isNaN(limitNum) || limitNum < 1 || limitNum > 100) {
-      return res
-        .status(400)
-        .json({ error: "Límite debe ser un número entre 1 y 100" });
-    }
-
-    const skip = (pageNum - 1) * limitNum;
-
     const total = await prisma.product.count({ where });
 
     // Obtener productos
     const products = await prisma.product.findMany({
       where,
-      skip,
-      take: limitNum,
+      ...paginate,
       include: {
         category: true,
         brand: true,
@@ -114,9 +211,9 @@ export const getProducts = async (req, res) => {
     res.json({
       products,
       total,
-      page: pageNum,
-      limit: limitNum,
-      totalPages: Math.ceil(total / limitNum),
+      page: paginate.page,
+      limit: paginate.take,
+      totalPages: Math.ceil(total / paginate.take),
     });
   } catch (error) {
     console.error(error);

@@ -1,27 +1,24 @@
 import multer from "multer";
 import { join, extname } from "node:path";
 
-// Función para limpiar el nombre del archivo
 const sanitizeFileName = (file) => {
   const originalName = file.originalname;
   const extension = extname(originalName);
-  const filename = originalName.replace(extension, ""); // Quitar la extensión
-  const sanitizedName = filename.replace(/[^a-zA-Z0-9.]/g, "_"); // Reemplazar caracteres especiales con guiones bajos
-  return sanitizedName + extension; // Agregar la extensión al final
+  const filename = originalName.replace(extension, "");
+  const sanitizedName = filename.replace(/[^a-zA-Z0-9.]/g, "_");
+  return sanitizedName + extension;
 };
 
-// Configuración de almacenamiento de Multer
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, join(process.cwd(), "public/")); // Directorio donde se guardarán los archivos
+    cb(null, join(process.cwd(), "public/"));
   },
   filename: function (req, file, cb) {
     const sanitizedName = sanitizeFileName(file);
-    cb(null, Date.now() + "_" + sanitizedName); // Nombre del archivo
+    cb(null, Date.now() + "_" + sanitizedName);
   },
 });
 
-// Instancia de Multer
 const upload = multer({ storage: storage });
 
 export default upload;

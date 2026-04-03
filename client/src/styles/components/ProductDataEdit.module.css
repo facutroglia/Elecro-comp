@@ -1,0 +1,136 @@
+.EditProductContainer {
+  background: var(--white);
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+}
+.EditProductContainer h3 {
+  margin: 0 0 1.5rem 0;
+  color: var(--black);
+  font-size: 1.25rem;
+  border-bottom: 2px solid var(--white-02);
+  padding-bottom: 0.75rem;
+}
+.ProductData {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.ProductData dd,
+.ProductData dt {
+  color: var(--black);
+  font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  padding-left: 0.5rem;
+  border-left: solid 2px var(--gray);
+}
+.BtnEdit {
+  top: 1.5rem;
+  right: 1.5rem;
+}
+.BtnEdit button {
+  margin-top: 1rem;
+  background: var(--white-02);
+  color: var(--gray);
+  border: solid 1px var(--gray);
+  padding: 0.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s;
+}
+
+.BtnEdit button:hover {
+  background: var(--Btn-01);
+  color: var(--white);
+  transform: scale(1.1);
+}
+.EditForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  animation: fadeIn 0.3s ease;
+}
+.FieldsetEditData {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.labelEditData {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--gray);
+}
+.InputEditData,
+.Select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--gray);
+  border-radius: 8px;
+  font-size: 1rem;
+  color: var(--black);
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+.InputEditData:focus,
+.Select:focus {
+  outline: none;
+  border-color: var(--Btn-01);
+}
+.EditForm fieldset:has(.Select) {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  border: none;
+  padding: 0;
+}
+.BtnSaveData {
+  background-color: var(--Btn-01);
+  color: var(--white);
+  border: none;
+  padding: 0.85rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 0.5rem;
+}
+.BtnSaveData:hover {
+  background-color: var(--Btn-01-hover);
+}
+
+.BtnSaveData:disabled {
+  background-color: var(--white-02);
+  cursor: not-allowed;
+}
+.BtnCancel {
+  background-color: var(--Btn-02);
+  color: var(--gray);
+  border: none;
+  padding: 0.85rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 0.5rem;
+}
+.BtnCancel:hover {
+  background-color: var(--Btn-02-hover);
+}
+.error {
+  color: var(--error);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+@media (max-width: 600px) {
+  .EditForm fieldset:has(.Select) {
+    grid-template-columns: 1fr;
+  }
+}

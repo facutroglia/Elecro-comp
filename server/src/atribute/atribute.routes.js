@@ -5,7 +5,6 @@ import {
   updateAtribute,
   deleteAtribute,
 } from "./atribute.controller.js";
-import router from "../category/category.routes.js";
 
 const routes = Router();
 

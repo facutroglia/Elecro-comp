@@ -5,11 +5,16 @@ import {
   getProductById,
   updateProduct,
   deleteProduct,
+  addImage,
+  removeImage,
 } from "./product.controller.js";
 
 const router = express.Router();
 
 router.post("/", createProduct);
+
+router.post("/agregar/imagen", addImage);
+router.delete("/quitar/imagen", removeImage);
 
 router.get("/", getProducts);
 

@@ -1,5 +1,5 @@
 export const allProductsCustomers = async ({ request }) => {
-  let endpoint = `${import.meta.env.VITE_URL_API}/productos`;
+  let endpoint = `${import.meta.env.VITE_BACKEND_URL}/productos`;
   let query = new URLSearchParams({});
   const url = new URL(request.url);
   if (url.searchParams) {
@@ -22,23 +22,23 @@ export const allProductsCustomers = async ({ request }) => {
 };
 
 export const allProductsByCategory = async ({ params }) => {
-  let endpoint = `${import.meta.env.VITE_URL_API}/productos`;
+  let endpoint = `${import.meta.env.VITE_BACKEND_URL}/productos`;
   let query = new URLSearchParams({});
-  if (params.category) {
-    if (url.searchParams.get("c")) {
-      query.append("category", params.category);
-    }
+  if (params.categoria) {
+    query.append("category", params.categoria);
   }
-  const products = await fetch(
-    `${endpoint} ${query.size > 0 ? `?${query.toString()}` : ""}`,
-  );
+  const products = await fetch(`${endpoint}${`?${query.toString()}`}`);
+  const data = await products.json();
   let res = {};
-  res.productos = await products.json();
+  res.productos = data.products;
+  res.total = data.total;
+  res.totalPages = data.totalPages;
+  res.page = data.page;
   return res;
 };
 
 export const oneProduct = async ({ params }) => {
-  const baseURL = `${import.meta.env.VITE_URL_API}/productos`;
+  const baseURL = `${import.meta.env.VITE_BACKEND_URL}/productos`;
   const detail = await fetch(`${baseURL}/${params.id}`);
   const producto = await detail.json();
   const products = await fetch(
@@ -51,9 +51,30 @@ export const oneProduct = async ({ params }) => {
 };
 
 export const allProductsAdmins = async ({ request }) => {
-  let endpoint = `${import.meta.env.VITE_URL_API}/productos`;
+  let endpoint = `${import.meta.env.VITE_BACKEND_URL}/productos`;
   const products = await fetch(`${endpoint}`);
+  const data = await products.json();
   let res = {};
-  res.productos = await products.json();
+  res.productos = data.products;
+  return res;
+};
+
+export const oneProductEdit = async ({ params }) => {
+  const baseURL = `${import.meta.env.VITE_BACKEND_URL}/productos`;
+  const detail = await fetch(`${baseURL}/${params.id}`);
+  const producto = await detail.json();
+  let res = {};
+  res.producto = {
+    data: {
+      id: params.id,
+      name: producto.name,
+      description: producto.description,
+      price: producto.price,
+      category: producto.category,
+      brand: producto.brand,
+    },
+    gallery: producto.gallery,
+    attributes: producto.attributes,
+  };
   return res;
 };

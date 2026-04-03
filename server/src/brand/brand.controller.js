@@ -4,8 +4,8 @@ export const getBrands = async (req, res) => {
   try {
     const brands = await prisma.brand.findMany({
       include: {
-        logo: true, // Trae la info del archivo (url, nombre, etc.)
-        _count: { select: { products: true } }, // Útil para saber cuántos productos tiene la marca
+        logo: true,
+        _count: { select: { products: true } },
       },
     });
     res.json(brands);
@@ -20,7 +20,7 @@ export const createBrand = async (req, res) => {
     const newBrand = await prisma.brand.create({
       data: {
         name,
-        logoId: logoId || null, // logoId es opcional en tu esquema
+        logoId: logoId || null,
       },
     });
     res.status(201).json(newBrand);

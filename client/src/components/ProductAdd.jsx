@@ -188,7 +188,7 @@ const ProductAdd = () => {
             </p>
           )}
         </fieldset>
-        <fieldset>
+        <fieldset className={styles.FieldsetSelect}>
           <select className={styles.Select} {...addForm.register("categoryId")}>
             <option value="" disabled>
               Selecciona una categoria

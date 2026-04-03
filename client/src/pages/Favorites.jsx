@@ -18,14 +18,8 @@ const Favorites = () => {
             <p>No tenes productos agregados.</p>
           ) : (
             <div className={styles.FavoritesProducts}>
-              {favorites.map(({ name, id, precio, image }) => (
-                <ProductCard
-                  key={id}
-                  name={name}
-                  id={id}
-                  precio={precio}
-                  image={image}
-                />
+              {favorites.map((producto) => (
+                <ProductCard key={producto.id} {...producto} />
               ))}
             </div>
           )}
