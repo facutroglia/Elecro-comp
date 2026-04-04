@@ -1,8 +1,9 @@
 import { Fragment, useState, useEffect } from "react";
 import styles from "../styles/pages/Detail.module.css";
 import { useCart } from "../context/useCart.jsx";
+import { useLoaderData } from "react-router";
 const Detail = () => {
-  // const {producto,relacionados} = useLoaderData()
+  const { producto, relacionados } = useLoaderData();
   const { add, items } = useCart();
   const [current, setCurrent] = useState(null);
   useEffect(() => {

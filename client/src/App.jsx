@@ -95,7 +95,7 @@ export const App = createBrowserRouter([
             <Detail />
           </Loader>
         ),
-        // loader: oneProduct,
+        loader: oneProduct,
       },
 
       {

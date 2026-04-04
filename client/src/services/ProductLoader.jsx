@@ -1,3 +1,5 @@
+import { id } from "zod/v4/locales";
+
 export const allProductsCustomers = async ({ request }) => {
   let endpoint = `${import.meta.env.VITE_BACKEND_URL}/productos`;
   let query = new URLSearchParams({});
@@ -42,11 +44,14 @@ export const oneProduct = async ({ params }) => {
   const detail = await fetch(`${baseURL}/${params.id}`);
   const producto = await detail.json();
   const products = await fetch(
-    `${baseURL}?${new URLSearchParams({ category: producto.category.id }).toString()}`,
+    `${baseURL}?${new URLSearchParams({ category: producto.category.name }).toString()}`,
   );
+  const relacionados = await products.json();
   let res = {};
   res.producto = producto;
-  res.relacionados = await products.json();
+  res.relacionados = relacionados.products.filter(
+    ({ id }) => id != producto.id,
+  );
   return res;
 };
 

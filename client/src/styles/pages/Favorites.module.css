@@ -8,7 +8,8 @@
 }
 .FavoritesProducts {
   display: flex;
-  gap: 1rem;
+  margin: 0.5rem;
+  gap: 0.5rem;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;

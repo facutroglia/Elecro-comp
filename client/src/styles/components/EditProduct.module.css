@@ -1,16 +1,48 @@
 .EditProductLayout {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr;
-  gap: 1rem;
-  padding: 1rem;
-  align-items: start;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 1.5rem;
+  padding: 2rem;
+  align-items: stretch;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
-@media (max-width: 1100px) {
+.DataForm,
+.GaleryForm,
+.AttributeForm {
+  background: var(--white);
+  border-radius: 12px;
+  min-width: 0;
+  height: 100%;
+}
+
+@media (max-width: 1200px) {
   .EditProductLayout {
     grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "datos galeria"
+      "atributos galeria";
+  }
+
+  .DataForm {
+    grid-area: datos;
+  }
+  .GaleryForm {
+    grid-area: galeria;
   }
   .AttributeForm {
-    grid-column: span 2;
+    grid-area: atributos;
+  }
+}
+
+@media (max-width: 768px) {
+  .EditProductLayout {
+    grid-template-columns: 1fr;
+    grid-template-areas: none;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
   }
 }

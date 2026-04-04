@@ -26,10 +26,10 @@ const ProductCard = ({ name, id, price, gallery }) => {
       )}
 
       <dl>
-        <dt className={styles.Title}>Nombre</dt>
-        <dd className={styles.infoCard}>{name}</dd>
-        <dt className={styles.Title}>Precio</dt>
-        <dd className={styles.infoCard}>{formatPrice(price)}</dd>
+        <dd className={styles.ProductTitle}>{name}</dd>
+      </dl>
+      <dl>
+        <dd className={styles.productPrice}>{formatPrice(price)}</dd>
       </dl>
       <form className={styles.BtnCard}>
         <button
@@ -55,7 +55,9 @@ const ProductCard = ({ name, id, price, gallery }) => {
             <Icon
               icon="mdi:heart"
               style={{
-                color: favorites.some((fav) => fav.id === id) ? "red" : "gray",
+                color: favorites.some((fav) => fav.id === id)
+                  ? "red"
+                  : "var(--gray-02)",
               }}
             ></Icon>
           </button>
