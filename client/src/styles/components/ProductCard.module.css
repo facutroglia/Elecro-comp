@@ -45,6 +45,13 @@
   margin-top: auto;
   padding-bottom: 0.5rem;
 }
+output {
+  display: flex;
+  align-items: center;
+}
+span {
+  color: var(--secondary);
+}
 .Btns {
   background-color: var(--primary);
   padding: 0.5rem;

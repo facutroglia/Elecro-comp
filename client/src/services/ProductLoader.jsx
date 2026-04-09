@@ -16,7 +16,7 @@ export const allProductsCustomers = async ({ request }) => {
     }
   }
   const products = await fetch(
-    `${endpoint} ${query.size > 0 ? `?${query.toString()}` : ""}`,
+    `${endpoint}${query.size > 0 ? `?${query.toString()}` : ""}`,
   );
   let res = {};
   res = await products.json();

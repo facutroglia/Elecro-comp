@@ -7,11 +7,7 @@ function ProductList({ products }) {
   return (
     <ul className={styles.ProductList}>
       {products.map((product) => (
-        <ProductCard
-          key={product.id}
-          image={`/assets/${product?.gallery?.[0]?.url}`}
-          {...product}
-        />
+        <ProductCard key={product.id} {...product} />
       ))}
     </ul>
   );

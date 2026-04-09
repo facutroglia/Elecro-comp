@@ -155,7 +155,7 @@ export const removeImage = async (req, res) => {
 
 export const getProducts = async (req, res) => {
   try {
-    const { search, category, brand, minPrice, maxPrice, page } = req.query;
+    let { search, category, brand, minPrice, maxPrice, page } = req.query;
 
     const where = {};
     if (search) {
@@ -190,9 +190,9 @@ export const getProducts = async (req, res) => {
           .status(400)
           .json({ error: "Página debe ser un número mayor a 0" });
       }
-      paginate.page = parseInt(page);
+      page = parseInt(page);
       paginate.take = 4;
-      paginate.skip = (pageNum - 1) * paginate.take;
+      paginate.skip = (page - 1) * paginate.take;
     }
     const total = await prisma.product.count({ where });
 
@@ -211,7 +211,7 @@ export const getProducts = async (req, res) => {
     res.json({
       products,
       total,
-      page: paginate.page,
+      page: page,
       limit: paginate.take,
       totalPages: Math.ceil(total / paginate.take),
     });

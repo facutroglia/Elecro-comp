@@ -18,7 +18,11 @@
   color: var(--primary);
   cursor: pointer;
   transition: transform 0.3s ease;
-}
-.BtnPaginate:hover {
-  transform: scale(1.02);
+  &:hover {
+    transform: scale(1.02);
+  }
+  &:disabled {
+    opacity: 0.75;
+    cursor: not-allowed;
+  }
 }

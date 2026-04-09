@@ -4,10 +4,10 @@ import { Fragment } from "react";
 import { Icon } from "@iconify/react";
 import { useCart } from "../context/useCart.jsx";
 import { id } from "zod/v4/locales";
-
+import formatPrice from "../utils/formatPrice.js";
 function Item({ producto, cantidad }) {
   const { add, reduce, remove } = useCart();
-  const subtotal = (producto.precio || 0) * (cantidad || 0);
+  const subtotal = (producto.price || 0) * (cantidad || 0);
   return (
     <Fragment>
       <tr className={styles.ItemProducto}>
@@ -15,7 +15,7 @@ function Item({ producto, cantidad }) {
           {producto.name}
         </td>
         <td data-label="Precio" className={styles.Datos}>
-          {producto.precio?.toLocaleString(`es-AR`)}
+          {formatPrice(producto.price)}
         </td>
         <td data-label="Cantidad" className={styles.Cantidad}>
           <button
@@ -35,9 +35,7 @@ function Item({ producto, cantidad }) {
           </button>
         </td>
         <td data-label="Sub total">
-          <output className={styles.Datos}>
-            {subtotal.toLocaleString(`es-AR`)}
-          </output>
+          <output className={styles.Datos}>{formatPrice(subtotal)}</output>
         </td>
         <td>
           <button

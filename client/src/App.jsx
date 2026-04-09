@@ -72,13 +72,13 @@ export const App = createBrowserRouter([
       },
       {
         path: "productos",
+        loader: allProductsCustomers,
         element: (
           <Loader>
             <Products />
           </Loader>
         ),
       },
-      // loader: allProductsCustomers,
       {
         path: "productos/categoria/:categoria",
         loader: allProductsByCategory,

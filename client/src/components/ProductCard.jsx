@@ -1,4 +1,4 @@
-import React from "react";
+import { Fragment } from "react";
 import { useNavigate } from "react-router";
 import { useCart } from "../context/useCart.jsx";
 import { useFavorites } from "../context/useFavorite.jsx";
@@ -9,7 +9,7 @@ import formatPrice from "../utils/formatPrice.js";
 
 const ProductCard = ({ name, id, price, gallery }) => {
   const navigate = useNavigate();
-  const { add } = useCart();
+  const { add, cartItems, reduce } = useCart();
   const { user } = useUser();
   const { favorites, toggleFavorite } = useFavorites();
 
@@ -31,14 +31,40 @@ const ProductCard = ({ name, id, price, gallery }) => {
       <dl>
         <dd className={styles.productPrice}>{formatPrice(price)}</dd>
       </dl>
-      <form className={styles.BtnCard}>
-        <button
-          className={styles.Btns}
-          onClick={() => add({ name, price, id, image })}
-          type="button"
-        >
-          Agregar
-        </button>
+      <form onSubmit={(e) => e.preventDefault()} className={styles.BtnCard}>
+        {Array.isArray(cartItems) &&
+          (cartItems.length === 0 || cartItems.find((i) => i.id !== id)) && (
+            <button
+              type="button"
+              onClick={() => add({ name, id, price, gallery })}
+              className={styles.Btns}
+            >
+              Agregar al <Icon icon="mdi:cart" />
+            </button>
+          )}
+        {Array.isArray(cartItems) &&
+          cartItems.length > 0 &&
+          cartItems.find((i) => i.id === id) && (
+            <Fragment>
+              <button
+                type="button"
+                className={styles.Btns}
+                onClick={() => add({ name, id, price, gallery })}
+              >
+                <Icon icon="mdi:plus" />
+              </button>
+              <output>
+                <span>{cartItems.find((i) => i.id === id)?.cantidad}</span>
+              </output>
+              <button
+                type="button"
+                className={styles.Btns}
+                onClick={() => reduce({ name, id, price, gallery })}
+              >
+                <Icon icon="mdi:minus" />
+              </button>
+            </Fragment>
+          )}
         <button
           className={styles.Btns}
           onClick={() => navigate(`/productos/${id}`)}

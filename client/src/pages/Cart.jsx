@@ -5,12 +5,12 @@ import { NavLink } from "react-router";
 import { useCart } from "../context/useCart.jsx";
 import { useUser } from "../context/useUser.jsx";
 import { Icon } from "@iconify/react";
-
+import formatPrice from "../utils/formatPrice.js";
 const Cart = () => {
   const { cartItems, clear } = useCart();
   const { user } = useUser();
   const total = cartItems.reduce((acc, item) => {
-    return acc + item.precio * item.cantidad;
+    return (acc += item.price * item.cantidad);
   }, 0);
 
   return (
@@ -61,7 +61,7 @@ const Cart = () => {
               </td>
               <td className={styles.TdTotal}>
                 <b>
-                  <b>${total.toLocaleString("es-AR")}</b>
+                  <b>{formatPrice(total)}</b>
                 </b>
               </td>
             </tr>

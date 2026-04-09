@@ -1,62 +1,153 @@
 #detail {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 1rem;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
 }
 
 #gallery {
-  flex: 1;
-  max-width: 1024px;
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  padding-right: 1rem;
-  border-right: 0.25rem solid var(--white);
+  gap: 1.5rem;
+  align-items: flex-start;
 }
 
 #thumbs {
-  width: 5rem;
+  width: 80px;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .thumb {
   aspect-ratio: 1 / 1;
-  border-radius: 0.25rem;
-  padding: 0.25rem;
+  border-radius: 8px;
+  overflow: hidden;
   cursor: pointer;
-  border: 0.25rem solid transparent;
-  transition: all 0.3s ease-in-out;
-  &.active {
-    border-color: var(--primary);
-  }
-  & img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
+  padding: 7px;
+  border: 2px solid transparent;
+  background-color: var(--white);
+  transition: all 0.2s ease;
 }
+
+.thumb.active {
+  border: solid 4px var(--primary);
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
 #current {
   flex: 1;
+  background-color: var(--white);
+  border-radius: 12px;
+  overflow: hidden;
   display: flex;
-  aspect-ratio: 16 / 9;
-  & img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 1 / 1;
+}
+
+#current img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 #data {
-  flex: 1;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
-  align-content: flex-start;
-  gap: 1rem;
+  background-color: var(--soft-02);
+  border-radius: 12px;
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.AttributeName {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+.AttributeValue {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--primary);
+}
+.NameCaracteristicas {
+  font-size: 1.5rem;
+  color: var(--secondary);
+  font-weight: 400;
+}
+.ValorCaracteristicas {
+  font-size: 1rem;
+  font-family: monospace;
+}
+#data form {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.BtnAddProduct {
+  background-color: var(--primary);
+  color: var(--white);
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  border: solid 1px transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.BtnAddProduct:hover {
+  background-color: var(--secondary);
+  border: solid 1px var(--primary);
+  transform: translateY(-2px);
+}
+
+.Relacionados {
+  grid-column: 1 / span 2;
+  margin-top: 60px;
+  padding-top: 40px;
+  border-top: 1px solid var(--white);
+}
+
+.Relacionados h2 {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+@media (max-width: 880px) {
+  #detail {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  #gallery {
+    flex-direction: column-reverse;
+  }
+
+  #thumbs {
+    flex-direction: row;
+    width: 40%;
+    justify-content: center;
+  }
+
+  #current {
+    max-height: 400px;
+  }
+
+  .Relacionados {
+    grid-column: 1;
+  }
 }

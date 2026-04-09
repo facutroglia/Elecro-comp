@@ -31,7 +31,7 @@ export const CartProvider = ({ children }) => {
       prevItems
         .map((item) =>
           item.id === product.id
-            ? { ...item, cantidad: Math.max(item.cantidad - 1, 1) }
+            ? { ...item, cantidad: Math.max(item.cantidad - 1, 0) }
             : item,
         )
         .filter((item) => item.cantidad > 0),

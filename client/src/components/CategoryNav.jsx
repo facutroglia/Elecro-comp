@@ -57,7 +57,10 @@ const CategoryNav = () => {
 
       {!isMobile && (
         <nav id={styles.MenuSeccion}>
-          <NavLink to={"/productos"} className={styles.linkReset}>
+          <NavLink
+            to={`/productos?${new URLSearchParams({ p: 1 }).toString()}`}
+            className={styles.linkReset}
+          >
             Productos
           </NavLink>
           <NavLink to={"/contacto"} className={styles.linkReset}>
