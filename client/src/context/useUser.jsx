@@ -2,21 +2,55 @@ import { createContext, useContext, useState, useEffect } from "react";
 
 const UserContext = createContext();
 
+const getUser = async (userId) => {
+  try {
+    const response = await fetch("/api/usuarios/perfil", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: userId }),
+    });
+
+    const data = await response.json();
+    if (!response.ok) throw new Error("Error al traer al usuario");
+    return data;
+  } catch (error) {
+    console.error(error.message);
+  }
+};
+
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-  }, []);
-  useEffect(() => {
-    if (user) {
-      localStorage.setItem("user", JSON.stringify(user));
+  const [user, setUserState] = useState(null);
+
+  const persistUser = (userData) => {
+    if (userData) {
+      localStorage.setItem("user", JSON.stringify(userData));
     } else {
       localStorage.removeItem("user");
     }
-  }, [user]);
+  };
+
+  const setUser = (userData) => {
+    setUserState(userData);
+    persistUser(userData);
+  };
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (!storedUser) return;
+
+    const { id } = JSON.parse(storedUser);
+    getUser(id).then((data) => {
+      if (data) {
+        setUserState(data);
+        persistUser(data);
+      } else {
+        localStorage.removeItem("user");
+      }
+    });
+  }, []);
+
   return (
     <UserContext.Provider value={{ user, setUser }}>
       {children}

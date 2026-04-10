@@ -2,17 +2,19 @@
   display: flex;
   width: 100%;
 }
-.Content {
-  flex: 1;
+.HeaderOrders {
+  font-size: 1.5rem;
+  margin: 1rem;
 }
-.Content h2 {
-  font-size: 40px;
-  margin-bottom: 2rem;
-}
-.TableProducts {
+.OrdersContent {
   width: 100%;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
 }
-#TheadTable {
-  background-color: var(--soft-02);
+.OrdersList {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 3rem;
 }
