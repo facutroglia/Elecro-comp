@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import styles from "../styles/pages/Profile.module.css";
+import styles from "../styles/components/UserAvatar.module.css";
 import { useForm } from "react-hook-form";
 import { Icon } from "@iconify/react";
 import { useUser } from "../context/useUser";
@@ -62,15 +62,22 @@ const UserAvatar = ({ user, avatar }) => {
   return (
     <Fragment>
       {!avatar && (
-        <div>
+        <div className={styles.AvatarContainer}>
           <picture className={styles.ImgProfile}>
             <img
               src={`https://placehold.co/72/36013F/violet/png?${new URLSearchParams({ text: initial }).toString()}`}
               alt={`avatar del usuario ${user.id}`}
             />
           </picture>
-          <form onSubmit={addForm.handleSubmit(addAvatar)} method="post">
-            <label htmlFor={`add-avatar-${user.id}`}>
+          <form
+            className={styles.AvatarForm}
+            onSubmit={addForm.handleSubmit(addAvatar)}
+            method="post"
+          >
+            <label
+              className={styles.AvatarLabel}
+              htmlFor={`add-avatar-${user.id}`}
+            >
               {inputAdd?.[0] ? "Cambiar Imagen" : "Cargar Avatar"}
             </label>
             <input
@@ -80,7 +87,7 @@ const UserAvatar = ({ user, avatar }) => {
               id={`add-avatar-${user.id}`}
               style={{ display: "none" }}
             />
-            <button type="submit">
+            <button type="submit" className={styles.BtnSubmitAvatar}>
               {addForm.formState.isSubmitting ? (
                 <Icon icon="line-md:loading-loop" />
               ) : (
@@ -91,15 +98,22 @@ const UserAvatar = ({ user, avatar }) => {
         </div>
       )}
       {avatar && (
-        <div>
+        <div className={styles.AvatarContainer}>
           <picture className={styles.ImgProfile}>
             <img
               src={`/assets/${avatar?.url}`}
               alt={`avatar del usuario ${user.id}`}
             />
           </picture>
-          <form onSubmit={editForm.handleSubmit(editAvatar)} method="post">
-            <label htmlFor={`edit-avatar-${user.id}`}>
+          <form
+            className={styles.AvatarForm}
+            onSubmit={editForm.handleSubmit(editAvatar)}
+            method="post"
+          >
+            <label
+              className={styles.AvatarLabel}
+              htmlFor={`edit-avatar-${user.id}`}
+            >
               {inputEdit?.[0] ? "Cambiar Imagen" : "Actualizar Avatar"}
             </label>
             <input
@@ -109,7 +123,7 @@ const UserAvatar = ({ user, avatar }) => {
               id={`edit-avatar-${user.id}`}
               style={{ display: "none" }}
             />
-            <button type="submit">
+            <button type="submit" className={styles.BtnSubmitAvatar}>
               {editForm.formState.isSubmitting ? (
                 <Icon icon="line-md:loading-loop" />
               ) : (

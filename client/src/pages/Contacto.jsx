@@ -21,7 +21,14 @@ function Contact() {
       message: "",
     },
   });
-  const sendContact = (data) => {};
+  const sendContact = async (data) => {
+    return new Promise((resolve, reject) =>
+      setTimeout(() => {
+        ContactForm.reset();
+        resolve();
+      }, 1000),
+    );
+  };
   return (
     <Fragment>
       <section id={Styles.ContactContainer}>
@@ -107,7 +114,18 @@ function Contact() {
               </p>
             )}
           </fieldset>
-          <button id={Styles.BtnSubmmit}>Enviar</button>
+          <button
+            id={Styles.BtnSubmmit}
+            disabled={ContactForm.formState.isSubmitting}
+          >
+            {ContactForm.formState.isSubmitting ? "Enviando..." : "Enviar"}
+          </button>
+          {ContactForm.formState.isSubmitSuccessful && (
+            <p className={Styles.MessageSucces}>
+              <Icon icon="twemoji:check-mark-button" />
+              Mensaje enviado con exito
+            </p>
+          )}
         </form>
       </section>
     </Fragment>

@@ -110,6 +110,12 @@
     transform: scale(1.05);
   }
 }
+.MessageSucces {
+  border: solid 1px var(--success);
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  color: var(--success);
+}
 
 @media (max-width: 768px) {
   #ContactContainer {

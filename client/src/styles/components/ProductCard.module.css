@@ -45,13 +45,13 @@
   margin-top: auto;
   padding-bottom: 0.5rem;
 }
-output {
+.Quantity {
   display: flex;
   align-items: center;
+  color: var(--white);
+  font-weight: 600;
 }
-span {
-  color: var(--secondary);
-}
+
 .Btns {
   background-color: var(--primary);
   padding: 0.5rem;

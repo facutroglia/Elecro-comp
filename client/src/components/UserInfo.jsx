@@ -1,5 +1,5 @@
 import { Fragment, useState, useEffect } from "react";
-import styles from "../styles/pages/Profile.module.css";
+import styles from "../styles/components/UserInfo.module.css";
 import { useForm } from "react-hook-form";
 import { Icon } from "@iconify/react";
 import { useNavigate } from "react-router";
@@ -47,90 +47,115 @@ const UserInfo = ({ user }) => {
   }, [isEdit]);
 
   return (
-    <Fragment>
-      {!isEdit && (
-        <article>
-          <h2>Información Personal</h2>
-          <dl>
-            <dt>Nombre Completo:</dt>
-            <dd>{user.name}</dd>
-            <dt>Email:</dt>
-            <dd>{user.email}</dd>
-            <dt>Tel/Cel:</dt>
-            <dd>{user.phone ?? "Sin completar"}</dd>
-            <dt>Dirección/Ubicación:</dt>
-            <dd>{user.address ?? "Sin completar"}</dd>
-            <dt>Codigo Postal</dt>
-            <dd>{user.codeZip ?? "Sin completar"}</dd>
-          </dl>
-          <button type="button" onClick={() => setIsEdit(true)}>
-            Editar
-          </button>
-        </article>
-      )}
-
-      {isEdit && (
-        <form
-          onSubmit={editForm.handleSubmit(update)}
-          className={styles.FormData}
-        >
-          <fieldset className={styles.FieldsetContainer}>
-            <label htmlFor="">Nombre Completo:</label>
-            <input
-              type="text"
-              placeholder="Facundo"
-              {...editForm.register("name")}
-            />
-          </fieldset>
-          <fieldset className={styles.FieldsetContainer}>
-            <label htmlFor="">Email:</label>
-            <input
-              type="email"
-              placeholder="Facundo@gmail.com"
-              {...editForm.register("email")}
-            />
-          </fieldset>
-          <fieldset className={styles.FieldsetContainer}>
-            <label htmlFor="">Tel/Cel:</label>
-            <input
-              type="tel"
-              placeholder="3512939485"
-              {...editForm.register("phone")}
-            />
-          </fieldset>
-          <fieldset className={styles.FieldsetContainer}>
-            <label htmlFor="">Direccion:</label>
-            <input
-              type="text"
-              placeholder="Cordoba,Cordoba - Argentina"
-              {...editForm.register("address")}
-            />
-          </fieldset>
-          <fieldset className={styles.FieldsetContainer}>
-            <label htmlFor="">Codigo Postal:</label>
-            <input
-              type="text"
-              placeholder="X1128"
-              {...editForm.register("codeZip")}
-            />
-          </fieldset>
-          <fieldset>
-            <button type="button" onClick={() => setIsEdit(false)}>
-              Cancelar
-            </button>
+    <section className={styles.UserInfoContainer}>
+      <Fragment>
+        {!isEdit && (
+          <article className={styles.UserInfoContent}>
+            <h2>Información Personal</h2>
+            <dl className={styles.DataUser}>
+              <dt>Nombre Completo:</dt>
+              <dd>{user.name}</dd>
+              <dt>Email:</dt>
+              <dd>{user.email}</dd>
+              <dt>Tel/Cel:</dt>
+              <dd>{user.phone ?? "Sin completar"}</dd>
+              <dt>Dirección/Ubicación:</dt>
+              <dd>{user.address ?? "Sin completar"}</dd>
+              <dt>Codigo Postal</dt>
+              <dd>{user.codeZip ?? "Sin completar"}</dd>
+            </dl>
             <button
-              className={styles.BtnProfile}
-              type="submit"
-              disabled={editForm.formState.isSubmitting}
+              className={styles.BtnEditInfo}
+              type="button"
+              onClick={() => setIsEdit(true)}
             >
-              {editForm.formState.isSubmitting
-                ? "Actualizando..."
-                : "Guardar cambios"}
+              Editar
             </button>
-          </fieldset>
-        </form>
-      )}
-    </Fragment>
+          </article>
+        )}
+
+        {isEdit && (
+          <form
+            onSubmit={editForm.handleSubmit(update)}
+            className={styles.FormData}
+          >
+            <fieldset className={styles.FieldsetContainer}>
+              <label className={styles.labelInfo} htmlFor="">
+                Nombre Completo:
+              </label>
+              <input
+                className={styles.InputInfo}
+                type="text"
+                placeholder="Facundo"
+                {...editForm.register("name")}
+              />
+            </fieldset>
+            <fieldset className={styles.FieldsetContainer}>
+              <label className={styles.labelInfo} htmlFor="">
+                Email:
+              </label>
+              <input
+                className={styles.InputInfo}
+                type="email"
+                placeholder="Facundo@gmail.com"
+                {...editForm.register("email")}
+              />
+            </fieldset>
+            <fieldset className={styles.FieldsetContainer}>
+              <label className={styles.labelInfo} htmlFor="">
+                Tel/Cel:
+              </label>
+              <input
+                className={styles.InputInfo}
+                type="tel"
+                placeholder="3512939485"
+                {...editForm.register("phone")}
+              />
+            </fieldset>
+            <fieldset className={styles.FieldsetContainer}>
+              <label className={styles.labelInfo} htmlFor="">
+                Direccion:
+              </label>
+              <input
+                className={styles.InputInfo}
+                type="text"
+                placeholder="Cordoba,Cordoba - Argentina"
+                {...editForm.register("address")}
+              />
+            </fieldset>
+            <fieldset className={styles.FieldsetContainer}>
+              <label className={styles.labelInfo} htmlFor="">
+                Codigo Postal:
+              </label>
+              <input
+                className={styles.InputInfo}
+                type="text"
+                placeholder="X1128"
+                {...editForm.register("codeZip")}
+              />
+            </fieldset>
+            <fieldset>
+              <button
+                className={styles.BtnCancelData}
+                type="button"
+                onClick={() => setIsEdit(false)}
+              >
+                Cancelar
+              </button>
+              <button
+                className={styles.BtnSaveData}
+                type="submit"
+                disabled={editForm.formState.isSubmitting}
+              >
+                {editForm.formState.isSubmitting
+                  ? "Actualizando..."
+                  : "Guardar cambios"}
+              </button>
+            </fieldset>
+          </form>
+        )}
+      </Fragment>
+    </section>
   );
 };
 

@@ -16,10 +16,13 @@
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
   color: var(--white);
   max-height: 90vh;
-  overflow-y: auto;
   border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 .BtnCloseDetail {
+  position: absolute;
   top: 0.5rem;
   right: 1rem;
   background: var(--white);
@@ -42,7 +45,7 @@
 .DataOrder {
   border-bottom: 1px solid var(--white-02);
   padding-bottom: 1.5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .DataOrder h3 {
@@ -50,30 +53,37 @@
   font-size: 1.8rem;
   color: var(--white);
 }
+.InfoOrder {
+  display: flex;
 
-.DataOrder p {
-  margin: 0.5rem 0;
-  font-size: 1rem;
+  justify-content: start;
+  align-items: center;
 }
 
-.DataOrder b {
-  color: var(--gray-02);
-  margin-right: 0.5rem;
-}
-
-.DetailProducts h3 {
+.InfoOrder b {
   text-transform: uppercase;
-  font-size: 0.9rem;
-  letter-spacing: 1px;
-  color: var(--gray-02);
-  margin-bottom: 1rem;
+  color: var(--white);
+}
+.InfoOrder {
+  color: var(--secondary);
+  font-weight: 600;
 }
 
 .ProductList {
   list-style: none;
   padding: 0;
+  overflow-y: auto;
+  flex: 1;
+  padding-right: 5px;
 }
 
+.ProductList::-webkit-scrollbar {
+  width: 8px;
+}
+.ProductList::-webkit-scrollbar-thumb {
+  background: var(--soft-04);
+  border-radius: 10px;
+}
 .ProductList li {
   display: grid;
   grid-template-columns: 80px 1fr auto;
@@ -83,6 +93,20 @@
   padding: 1rem;
   border-radius: 12px;
   margin-bottom: 1rem;
+}
+.DetailProducts {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+}
+.DetailProducts h3 {
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  color: var(--white);
+  margin-bottom: 0.5rem;
 }
 
 .DetailProducts img {
@@ -100,8 +124,6 @@
 }
 
 .FooterDetail {
-  margin-top: 2rem;
-  padding-top: 1.5rem;
   border-top: 2px solid var(--white-02);
   display: flex;
   justify-content: space-between;
@@ -110,20 +132,87 @@
 
 .FooterDetail h4 {
   font-size: 1.2rem;
-  margin: 0;
+  margin-top: 0.3rem;
 }
 
 .FooterDetail p {
   font-size: 1.5rem;
   font-weight: 800;
   color: var(--secondary);
-  margin: 0;
+}
+@media (max-width: 1024px) {
+  .InfoOrder {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+  }
+  .InfoOrder dt,
+  .InfoOrder dd {
+    font-size: 0.9rem;
+  }
+  .Modal {
+    width: 80%;
+    padding: 1.5rem;
+  }
+
+  .DataOrder h3 {
+    font-size: 1.5rem;
+  }
 }
 
-.Modal::-webkit-scrollbar {
-  width: 8px;
+@media (max-width: 768px) {
+  .Overlay {
+    padding: 0.5rem;
+  }
+
+  .Modal {
+    padding: 1.5rem 1rem;
+  }
+
+  .InfoOrder {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .InfoOrder dt,
+  .InfoOrder dd {
+    margin: 0;
+  }
+  .ProductList li {
+    grid-template-columns: 70px 1fr;
+    gap: 1rem;
+    padding: 0.8rem;
+  }
+
+  .DetailProducts img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .FooterDetail {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
 }
-.Modal::-webkit-scrollbar-thumb {
-  background: var(--soft-04);
-  border-radius: 10px;
+
+@media (max-width: 480px) {
+  .InfoOrder {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .DataOrder h3 {
+    font-size: 1.2rem;
+  }
+
+  .BtnCloseDetail {
+    width: 30px;
+    height: 30px;
+    font-size: 1.2rem;
+  }
+
+  .FooterDetail p {
+    font-size: 1.2rem;
+  }
 }

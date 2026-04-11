@@ -12,6 +12,7 @@ const ProductCard = ({ name, id, price, gallery }) => {
   const { add, cartItems, reduce } = useCart();
   const { user } = useUser();
   const { favorites, toggleFavorite } = useFavorites();
+  const productInCart = cartItems.find((item) => item.id === id);
 
   return (
     <li className={styles.Card}>
@@ -32,39 +33,35 @@ const ProductCard = ({ name, id, price, gallery }) => {
         <dd className={styles.productPrice}>{formatPrice(price)}</dd>
       </dl>
       <form onSubmit={(e) => e.preventDefault()} className={styles.BtnCard}>
-        {Array.isArray(cartItems) &&
-          (cartItems.length === 0 || cartItems.find((i) => i.id !== id)) && (
+        {!productInCart ? (
+          <button
+            type="button"
+            onClick={() => add({ name, id, price, gallery })}
+            className={styles.Btns}
+          >
+            Agregar al <Icon icon="mdi:cart" />
+          </button>
+        ) : (
+          <Fragment>
             <button
               type="button"
-              onClick={() => add({ name, id, price, gallery })}
               className={styles.Btns}
+              onClick={() => add({ name, id, price, gallery })}
             >
-              Agregar al <Icon icon="mdi:cart" />
+              <Icon icon="mdi:plus" />
             </button>
-          )}
-        {Array.isArray(cartItems) &&
-          cartItems.length > 0 &&
-          cartItems.find((i) => i.id === id) && (
-            <Fragment>
-              <button
-                type="button"
-                className={styles.Btns}
-                onClick={() => add({ name, id, price, gallery })}
-              >
-                <Icon icon="mdi:plus" />
-              </button>
-              <output>
-                <span>{cartItems.find((i) => i.id === id)?.cantidad}</span>
-              </output>
-              <button
-                type="button"
-                className={styles.Btns}
-                onClick={() => reduce({ name, id, price, gallery })}
-              >
-                <Icon icon="mdi:minus" />
-              </button>
-            </Fragment>
-          )}
+            <output className={styles.Quantity}>
+              <span>{productInCart.cantidad}</span>
+            </output>
+            <button
+              type="button"
+              className={styles.Btns}
+              onClick={() => reduce({ name, id, price, gallery })}
+            >
+              <Icon icon="mdi:minus" />
+            </button>
+          </Fragment>
+        )}
         <button
           className={styles.Btns}
           onClick={() => navigate(`/productos/${id}`)}

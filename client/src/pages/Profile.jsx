@@ -43,13 +43,13 @@ const Profile = () => {
     <Fragment>
       <section id={styles.ProfileContainer}>
         <SideBar />
-        <main className={styles.Content}>
-          <header className={styles.TitleProfile}>
-            <h2>Mi cuenta</h2>
-          </header>
-          <UserAvatar avatar={{ ...avatar }} user={{ ...data }} />
-          <UserInfo user={{ ...data }} />
-        </main>
+        <section className={styles.Content}>
+          <h2>Mi cuenta</h2>
+          <section className={styles.UserData}>
+            <UserAvatar avatar={{ ...avatar }} user={{ ...data }} />
+            <UserInfo user={{ ...data }} />
+          </section>
+        </section>
       </section>
     </Fragment>
   );

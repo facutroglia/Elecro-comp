@@ -1,3 +1,4 @@
+/*
 .MiniCard {
   background-color: var(--soft-02);
   border-radius: 12px;
@@ -78,4 +79,149 @@
 }
 .BtnDetail:hover {
   background-color: var(--soft-04);
+}
+*/
+.MiniCard {
+  background-color: var(--soft-02);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--white-02);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.HeaderData {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--white-02);
+  padding-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.HeaderData h4 {
+  font-size: 0.9rem;
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.UlProducts {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.LiProducts {
+  display: grid;
+  grid-template-columns: 50px 1fr auto;
+  align-items: center;
+  gap: 1.5rem;
+  background-color: var(--soft-04);
+  padding: 0.8rem;
+  border-radius: 8px;
+}
+
+.LiProducts img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  background-color: var(--white);
+  border-radius: 4px;
+  padding: 2px;
+}
+
+.LiProducts p {
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin: 0;
+  color: var(--white);
+}
+
+.TotalPrice {
+  display: flex;
+  align-self: flex-end;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--secondary);
+  margin: 0.5rem 0;
+}
+
+.BtnDetail {
+  background-color: var(--white);
+  color: var(--black);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  align-self: flex-end;
+}
+
+.BtnDetail:hover {
+  background-color: var(--secondary);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .HeaderData {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .LiProducts img {
+    display: none;
+  }
+  .LiProducts p {
+    flex-direction: column;
+  }
+  .TotalPrice {
+    flex-direction: column;
+    font-size: 1.1rem;
+    align-self: center;
+  }
+
+  .BtnDetail {
+    width: 100%;
+  }
+}
+@media (max-width: 500px) {
+  .MiniCard {
+    padding: 0.5rem;
+    gap: 1rem;
+  }
+
+  .HeaderData h4 {
+    font-size: 0.8rem;
+    letter-spacing: 0;
+  }
+  .InfoH4 {
+    display: none;
+  }
+
+  .LiProducts {
+    display: none;
+  }
+
+  .TotalPrice {
+    flex-direction: column;
+    font-size: 1rem;
+    text-align: center;
+    padding-top: 0.8rem;
+  }
+
+  .BtnDetail {
+    padding: 0.7rem;
+    font-size: 0.8rem;
+  }
 }
