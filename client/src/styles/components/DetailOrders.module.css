@@ -55,18 +55,16 @@
 }
 .InfoOrder {
   display: flex;
-
+  gap: 1rem;
   justify-content: start;
   align-items: center;
+  color: var(--black);
+  font-weight: 600;
 }
 
 .InfoOrder b {
   text-transform: uppercase;
   color: var(--white);
-}
-.InfoOrder {
-  color: var(--secondary);
-  font-weight: 600;
 }
 
 .ProductList {
@@ -143,7 +141,7 @@
 @media (max-width: 1024px) {
   .InfoOrder {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 1.2rem;
   }
   .InfoOrder dt,
@@ -193,26 +191,5 @@
     flex-direction: column;
     gap: 0.5rem;
     text-align: center;
-  }
-}
-
-@media (max-width: 480px) {
-  .InfoOrder {
-    grid-template-columns: 1fr;
-    gap: 0.5rem;
-  }
-
-  .DataOrder h3 {
-    font-size: 1.2rem;
-  }
-
-  .BtnCloseDetail {
-    width: 30px;
-    height: 30px;
-    font-size: 1.2rem;
-  }
-
-  .FooterDetail p {
-    font-size: 1.2rem;
   }
 }
