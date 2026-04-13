@@ -1,5 +1,4 @@
 export const allOrders = async () => {
-  // Usamos tu variable de entorno como en los otros archivos
   let endpoint = `${import.meta.env.VITE_BACKEND_URL}/ordenes`;
 
   try {
@@ -11,7 +10,6 @@ export const allOrders = async () => {
 
     const data = await response.json();
 
-    // Seguimos tu patrón de crear un objeto res
     let res = {};
     res.pedidos = data;
 

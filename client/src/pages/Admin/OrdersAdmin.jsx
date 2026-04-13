@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useLoaderData } from "react-router";
 import Template from "../../components/Template";
 import styles from "../../styles/pages/AdminOrders.module.css";
+import { Icon } from "@iconify/react";
 
 const AdminOrders = () => {
   const { pedidos } = useLoaderData();
@@ -21,6 +22,8 @@ const AdminOrders = () => {
                 <th>Fecha</th>
                 <th>Total</th>
                 <th>Detalle</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
               </tr>
             </thead>
             <tbody className={styles.TableContent}>
@@ -36,10 +39,25 @@ const AdminOrders = () => {
                   <td>${getTotal(pedido.items)}</td>
                   <td>
                     <button
+                      type="button"
                       onClick={() => setPedidoSeleccionado(pedido)}
-                      className={styles.BtnDetail}
+                      className={styles.BtnOrders}
                     >
                       Ver detalle
+                    </button>
+                  </td>
+                  <td>
+                    <button type="button" className={styles.BtnOrders}>
+                      Editar
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      type="button"
+                      onClick={() => handleDelete(pedido.id)}
+                      className={styles.BtnDeleteOrder}
+                    >
+                      <Icon icon="mdi:trash" />
                     </button>
                   </td>
                 </tr>

@@ -7,15 +7,15 @@
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  background-color: #282a36;
-  color: var(--white);
+  background-color: var(--white);
+  color: var(--black);
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .Table thead {
-  background-color: #44475a;
+  background-color: var(--white-02);
 }
 
 .Table th {
@@ -25,7 +25,7 @@
   text-transform: uppercase;
   font-size: 0.85rem;
   letter-spacing: 1px;
-  color: var(--primary);
+  color: var(--secondary);
 }
 
 .TableContent td {
@@ -35,14 +35,15 @@
 }
 
 .TableContent tr:hover {
-  background-color: rgba(68, 71, 90, 0.5);
+  background-color: var(--white-02);
   transition: background-color 0.2s ease;
 }
 
-.BtnDetail {
+.BtnOrders {
   background-color: #6272a4;
   color: var(--white);
   border: none;
+  margin-right: 1rem;
   padding: 0.5rem 1rem;
   border-radius: 4px;
   cursor: pointer;
@@ -52,9 +53,23 @@
     background-color 0.2s;
 }
 
-.BtnDetail:hover {
+.BtnOrders:hover {
   background-color: var(--primary);
   transform: translateY(-2px);
+}
+.BtnDeleteOrder {
+  color: var(--white);
+  background-color: var(--error);
+  font-size: 2rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 12px;
+  cursor: pointer;
+  border: solid 1px transparent;
+}
+.BtnDeleteOrder:hover {
+  color: var(--error);
+  background-color: var(--white);
+  border: solid var(--error) 1px;
 }
 
 .noData {
@@ -80,8 +95,8 @@
 }
 
 .ModalContent {
-  background-color: var(--secondary);
-  color: var(--white);
+  background-color: var(--white-02);
+  color: var(--black);
   width: 90%;
   max-width: 500px;
   border-radius: 8px;
@@ -106,7 +121,7 @@
 .BtnCloseDetail {
   background: none;
   border: none;
-  color: var(--white);
+  color: var(--black);
   font-size: 1.5rem;
   cursor: pointer;
 }
@@ -149,7 +164,8 @@
 }
 
 .ModalTotal {
-  margin-top: 1rem;
+  margin-top: 0.5rem;
+  border-top: solid 1px var(--gray-02);
   display: flex;
   justify-content: space-between;
   font-size: 1.2rem;
