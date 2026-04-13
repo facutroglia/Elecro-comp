@@ -1,0 +1,176 @@
+.OrdersContainer {
+  padding: 1.5rem;
+  overflow-x: auto;
+}
+
+.Table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: #282a36;
+  color: var(--white);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.Table thead {
+  background-color: #44475a;
+}
+
+.Table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  color: var(--primary);
+}
+
+.TableContent td {
+  padding: 1rem;
+  border-bottom: 1px solid #44475a;
+  vertical-align: middle;
+}
+
+.TableContent tr:hover {
+  background-color: rgba(68, 71, 90, 0.5);
+  transition: background-color 0.2s ease;
+}
+
+.BtnDetail {
+  background-color: #6272a4;
+  color: var(--white);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition:
+    transform 0.1s,
+    background-color 0.2s;
+}
+
+.BtnDetail:hover {
+  background-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.noData {
+  text-align: center;
+  color: var(--white);
+  margin-top: 3rem;
+  font-style: italic;
+  font-size: 1.2rem;
+}
+/*---------------MODAL------------------*/
+
+.ModalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.ModalContent {
+  background-color: var(--secondary);
+  color: var(--white);
+  width: 90%;
+  max-width: 500px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-02);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.3s ease;
+}
+
+.ModalHeader {
+  padding: 1rem;
+  border-bottom: 1px solid var(--gray-02);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ModalHeader h3 {
+  margin: 0;
+  color: var(--primary);
+}
+
+.BtnCloseDetail {
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.ModalBody {
+  padding: 1rem;
+}
+
+.Separator {
+  border-top: 1px solid var(--gray);
+  margin: 1rem 0;
+}
+
+.ProductList {
+  list-style: none;
+  padding: 0 10px 0 0;
+  margin: 0;
+  max-height: 250px;
+  overflow-y: auto;
+}
+.ProductList::-webkit-scrollbar {
+  width: 8px;
+}
+
+.ProductList::-webkit-scrollbar-track {
+  background: var(--soft-02);
+  border-radius: 10px;
+}
+
+.ProductList::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 10px;
+}
+
+.ProductItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px dashed var(--gray);
+}
+
+.ModalTotal {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  color: var(--primary);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .Table th,
+  .Table td {
+    padding: 0.6rem;
+    font-size: 0.8rem;
+  }
+}

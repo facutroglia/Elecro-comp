@@ -26,6 +26,7 @@ const AdminCategory = lazy(() => import("./pages/Admin/Category"));
 const AdminBrand = lazy(() => import("./pages/Admin/Brand"));
 const AdminProducts = lazy(() => import("./pages/Admin/Products"));
 const AdminProductEdit = lazy(() => import("./pages/Admin/EditProduct"));
+const AdminOrders = lazy(() => import("./pages/Admin/OrdersAdmin"));
 // Services
 import {
   allProductsAdmins,
@@ -37,6 +38,7 @@ import {
 import { allCategories } from "./services/CategoryLoader";
 import { allBrands } from "./services/BrandsLoader";
 import { allMetrics } from "./services/AdminLoader";
+import { allOrders } from "./services/OrdersLoader";
 import Favorites from "./pages/Favorites";
 export const App = createBrowserRouter([
   {
@@ -206,6 +208,15 @@ export const App = createBrowserRouter([
             element: (
               <Loader>
                 <AdminProductEdit />
+              </Loader>
+            ),
+          },
+          {
+            path: "pedidos",
+            loader: allOrders,
+            element: (
+              <Loader>
+                <AdminOrders />
               </Loader>
             ),
           },

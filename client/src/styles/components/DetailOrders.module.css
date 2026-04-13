@@ -58,13 +58,13 @@
   gap: 1rem;
   justify-content: start;
   align-items: center;
-  color: var(--black);
+  color: var(--white-02);
   font-weight: 600;
 }
 
 .InfoOrder b {
   text-transform: uppercase;
-  color: var(--white);
+  color: var(--primary);
 }
 
 .ProductList {
@@ -136,7 +136,7 @@
 .FooterDetail p {
   font-size: 1.5rem;
   font-weight: 800;
-  color: var(--secondary);
+  color: var(--white);
 }
 @media (max-width: 1024px) {
   .InfoOrder {
