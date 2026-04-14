@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "rootDirectory": "client",
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build"
+    }
+  ],
+  "build": {
+    "env": {
+      "VITE_BACKEND_URL": "@VITE_BACKEND_URL",
+      "VITE_BACKEND_PUBLIC": "@VITE_BACKEND_PUBLIC"
+    }
+  },
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "\/.*", "dest": "/index.html" }
+  ]
+}
