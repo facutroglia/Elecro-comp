@@ -10,19 +10,22 @@ const BrandRemove = ({ brand }) => {
   const remove = async (data) => {
     try {
       if (brand.logoId) {
-        const reqFile = await fetch("/api/archivos", {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
+        const reqFile = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/archivos`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ id: brand.logoId }),
           },
-          body: JSON.stringify({ id: brand.logoId }),
-        });
+        );
         const resFile = await reqFile.json();
         if (!reqFile.ok) {
           throw new Error(resFile.error || "Failed to fetch files");
         }
       }
-      const req = await fetch("/api/marcas/", {
+      const req = await fetch(`${import.meta.env.VITE_BACKEND_URL}/marcas/`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

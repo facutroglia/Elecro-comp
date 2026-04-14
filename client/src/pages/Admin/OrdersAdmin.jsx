@@ -18,7 +18,7 @@ const AdminOrders = () => {
 
   const remove = async (data) => {
     try {
-      const req = await fetch("/api/ordenes", {
+      const req = await fetch(`${import.meta.env.VITE_BACKEND_URL}/ordenes`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

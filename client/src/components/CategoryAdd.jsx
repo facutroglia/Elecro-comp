@@ -14,15 +14,18 @@ const CategoryAdd = () => {
   const createCategory = async (data) => {
     if (!fileInput?.[0]) {
       try {
-        const req = await fetch("/api/categorias/", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
+        const req = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/categorias/`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name: data.name,
+            }),
           },
-          body: JSON.stringify({
-            name: data.name,
-          }),
-        });
+        );
         const createdCategory = await req.json();
         console.log("Categoría nueva:", createdCategory);
         navigate(0);
@@ -36,22 +39,28 @@ const CategoryAdd = () => {
         formData.append("name", data.name);
         formData.append("icon", fileInput?.[0]);
         formData.append("type", "category");
-        const reqFile = await fetch("/api/archivos/", {
-          method: "POST",
-          body: formData,
-        });
+        const reqFile = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/archivos/`,
+          {
+            method: "POST",
+            body: formData,
+          },
+        );
         const fileData = await reqFile.json();
         console.log("Archivo subido:", fileData);
-        const req = await fetch("/api/categorias/", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
+        const req = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/categorias/`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name: data.name,
+              iconId: fileData.id,
+            }),
           },
-          body: JSON.stringify({
-            name: data.name,
-            iconId: fileData.id,
-          }),
-        });
+        );
         const createdCategory = await req.json();
         console.log("Categoría nueva:", createdCategory);
         navigate(0);

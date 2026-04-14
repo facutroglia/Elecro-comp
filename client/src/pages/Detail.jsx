@@ -26,12 +26,20 @@ const Detail = () => {
               key={imagen.id}
               onClick={() => setCurrent(imagen)}
             >
-              <img src={`/assets/${imagen.url}`} alt="" />
+              <img
+                src={`${import.meta.env.VITE_BACKEND_PUBLIC}/${imagen.url}`}
+                alt=""
+              />
             </li>
           ))}
         </ul>
         <picture id={styles.current}>
-          {current?.id && <img src={`/assets/${current.url}`} alt="" />}
+          {current?.id && (
+            <img
+              src={`${import.meta.env.VITE_BACKEND_PUBLIC}/${current.url}`}
+              alt=""
+            />
+          )}
         </picture>
       </article>
       <article id={styles.data}>

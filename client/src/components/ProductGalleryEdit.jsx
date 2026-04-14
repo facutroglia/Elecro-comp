@@ -15,7 +15,7 @@ const ProductGalleryEdit = ({ galery, productId }) => {
     const formData = new FormData();
     formData.append("file", fileAdd[0]);
     formData.append("type", "product");
-    const res = await fetch("/api/archivos", {
+    const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/archivos`, {
       method: "POST",
       body: formData,
     });
@@ -24,16 +24,19 @@ const ProductGalleryEdit = ({ galery, productId }) => {
       throw new Error(resData.error || "Error al subir la imagen");
     }
     const fileId = resData.id;
-    const resLink = await fetch("/api/productos/agregar/imagen", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    const resLink = await fetch(
+      `${import.meta.env.VITE_BACKEND_URL}/productos/agregar/imagen`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          productId,
+          fileId,
+        }),
       },
-      body: JSON.stringify({
-        productId,
-        fileId,
-      }),
-    });
+    );
     const resLinkData = await resLink.json();
     if (!resLink.ok) {
       throw new Error(

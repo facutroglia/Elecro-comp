@@ -15,7 +15,7 @@ const Inventory = ({ products }) => {
                 product?.gallery.length > 0 && (
                   <picture className={styles.ImageNewProduct}>
                     <img
-                      src={`/assets/${product?.gallery[0].url}`}
+                      src={`${import.meta.env.VITE_BACKEND_PUBLIC}/${product?.gallery[0].url}`}
                       alt={`${product.name} image`}
                     />
                   </picture>

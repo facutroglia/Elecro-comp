@@ -51,12 +51,12 @@ const ProductAdd = () => {
   });
   useEffect(() => {
     const getCategories = async () => {
-      const res = await fetch("/api/categorias");
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/categorias`);
       const data = await res.json();
       setCategories(data);
     };
     const getBrands = async () => {
-      const res = await fetch("/api/marcas");
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/marcas`);
       const data = await res.json();
       setBrands(data);
     };
@@ -66,19 +66,22 @@ const ProductAdd = () => {
   const create = async (data) => {
     const { name, description, price, categoryId, brandId } = data;
     try {
-      const reqProduct = await fetch("/api/productos", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const reqProduct = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/productos`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name,
+            description,
+            price,
+            categoryId,
+            brandId,
+          }),
         },
-        body: JSON.stringify({
-          name,
-          description,
-          price,
-          categoryId,
-          brandId,
-        }),
-      });
+      );
       const resProduct = await reqProduct.json();
       if (!reqProduct.ok) {
         throw new Error(resProduct.error || "Error al crear el producto");
@@ -86,17 +89,20 @@ const ProductAdd = () => {
       const productId = resProduct.id;
       const atributos = await Promise.all(
         data.attributes.map(async (attr) => {
-          const res = await fetch("/api/atributos", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
+          const res = await fetch(
+            `${import.meta.env.VITE_BACKEND_URL}/atributos`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                name: attr.name,
+                value: attr.value,
+                productId,
+              }),
             },
-            body: JSON.stringify({
-              name: attr.name,
-              value: attr.value,
-              productId,
-            }),
-          });
+          );
           const resData = await res.json();
           if (!res.ok) {
             throw new Error(resData.error || "Error al crear el atributo");
@@ -109,25 +115,31 @@ const ProductAdd = () => {
           const formData = new FormData();
           formData.append("file", img.file[0]);
           formData.append("type", "product");
-          const res = await fetch("/api/archivos", {
-            method: "POST",
-            body: formData,
-          });
+          const res = await fetch(
+            `${import.meta.env.VITE_BACKEND_URL}/archivos`,
+            {
+              method: "POST",
+              body: formData,
+            },
+          );
           const resData = await res.json();
           if (!res.ok) {
             throw new Error(resData.error || "Error al subir la imagen");
           }
           const fileId = resData.id;
-          const resLink = await fetch("/api/productos/agregar/imagen", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
+          const resLink = await fetch(
+            `${import.meta.env.VITE_BACKEND_URL}/productos/agregar/imagen`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                productId,
+                fileId,
+              }),
             },
-            body: JSON.stringify({
-              productId,
-              fileId,
-            }),
-          });
+          );
           const resLinkData = await resLink.json();
           if (!resLink.ok) {
             throw new Error(

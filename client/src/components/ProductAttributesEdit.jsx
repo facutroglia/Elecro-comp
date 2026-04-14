@@ -9,7 +9,7 @@ const ProductAttributesEdit = ({ attributes, productId }) => {
 
   const add = async (data) => {
     try {
-      const res = await fetch("/api/atributos", {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/atributos`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

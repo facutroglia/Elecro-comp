@@ -21,7 +21,7 @@ const ProductAttribute = ({ id, name, value, productId }) => {
   });
   const edit = async (data) => {
     try {
-      const res = await fetch("/api/atributos", {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/atributos`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -44,7 +44,7 @@ const ProductAttribute = ({ id, name, value, productId }) => {
   };
   const remove = async (data) => {
     try {
-      const res = await fetch("/api/atributos", {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/atributos`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

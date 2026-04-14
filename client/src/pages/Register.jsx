@@ -27,13 +27,16 @@ const Register = () => {
     }
 
     try {
-      const request = await fetch("/api/usuarios/registrar", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const request = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/usuarios/registrar`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
         },
-        body: JSON.stringify(data),
-      });
+      );
       const response = await request.json();
       if (!request.ok) {
         throw new Error(response.error || "Error al registrar usuario");

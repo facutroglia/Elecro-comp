@@ -15,7 +15,9 @@ const CategoryNav = () => {
   }, [location]);
   useEffect(() => {
     const getCategories = async () => {
-      const request = await fetch("/api/categorias");
+      const request = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/categorias`,
+      );
       const response = await request.json();
       setCategorias(response);
     };
@@ -102,7 +104,10 @@ const CategoryNav = () => {
         {categorias.map((categoria) => (
           <NavLink to={`/productos/categoria/${categoria.name}`}>
             {!isMobile && categoria.iconId && (
-              <img src={`/assets/${categoria.icon.url}`} alt="" />
+              <img
+                src={`${import.meta.env.VITE_BACKEND_PUBLIC}/${categoria.icon.url}`}
+                alt=""
+              />
             )}
             <span>{categoria.name.toUpperCase()}</span>
           </NavLink>

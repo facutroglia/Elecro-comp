@@ -19,13 +19,16 @@ export const FavoritesProvider = ({ children }) => {
 
       try {
         setLoading(true);
-        const response = await fetch("/api/usuarios/perfil", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
+        const response = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/usuarios/perfil`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ id: user.id }),
           },
-          body: JSON.stringify({ id: user.id }),
-        });
+        );
 
         if (response.ok) {
           const data = await response.json();
@@ -58,8 +61,8 @@ export const FavoritesProvider = ({ children }) => {
 
     const isFavorited = favorites.some((fav) => fav.id === productId);
     const endpoint = isFavorited
-      ? "/api/usuarios/quitar/favorito"
-      : "/api/usuarios/agregar/favorito";
+      ? `${import.meta.env.VITE_BACKEND_URL}/usuarios/quitar/favorito`
+      : `${import.meta.env.VITE_BACKEND_URL}/usuarios/agregar/favorito`;
 
     try {
       const response = await fetch(endpoint, {

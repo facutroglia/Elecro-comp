@@ -20,7 +20,7 @@ const ProductCard = ({ name, id, price, gallery }) => {
         <picture>
           <img
             className={styles.CardImg}
-            src={`/assets/${gallery?.[0].url}`}
+            src={`${import.meta.env.VITE_BACKEND_PUBLIC}/${gallery?.[0].url}`}
             alt=""
           />
         </picture>

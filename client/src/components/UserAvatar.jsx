@@ -17,21 +17,27 @@ const UserAvatar = ({ user, avatar }) => {
       const formData = new FormData();
       formData.append("file", inputAdd?.[0]);
       formData.append("type", "avatar");
-      const reqFile = await fetch(`/api/archivos/`, {
-        method: "POST",
-        body: formData,
-      });
+      const reqFile = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/archivos/`,
+        {
+          method: "POST",
+          body: formData,
+        },
+      );
       const fileData = await reqFile.json();
       if (!reqFile.ok) {
         throw new Error(fileData.error || "Error en la carga de la imagen");
       }
-      const reqAvatar = await fetch("/api/usuarios/actualizar", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
+      const reqAvatar = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/usuarios/actualizar`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id: data.user.id, avatarId: fileData.id }),
         },
-        body: JSON.stringify({ id: data.user.id, avatarId: fileData.id }),
-      });
+      );
       const avatarData = await reqAvatar.json();
       if (!reqAvatar.ok) {
         throw new Error(avatarData.error || "Error en la carga del avatar");
@@ -47,10 +53,13 @@ const UserAvatar = ({ user, avatar }) => {
       formData.append("fileId", fileId);
       formData.append("file", inputEdit?.[0]);
       formData.append("type", "avatar");
-      const reqFile = await fetch(`/api/archivos/`, {
-        method: "PUT",
-        body: formData,
-      });
+      const reqFile = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/archivos/`,
+        {
+          method: "PUT",
+          body: formData,
+        },
+      );
       const fileData = await reqFile.json();
       if (!reqFile.ok) {
         throw new Error(fileData.error || "Error en la carga de la imagen");
@@ -101,7 +110,7 @@ const UserAvatar = ({ user, avatar }) => {
         <div className={styles.AvatarContainer}>
           <picture className={styles.ImgProfile}>
             <img
-              src={`/assets/${avatar?.url}`}
+              src={`${import.meta.env.VITE_BACKEND_PUBLIC}/${avatar?.url}`}
               alt={`avatar del usuario ${user.id}`}
             />
           </picture>

@@ -30,13 +30,16 @@ const Checkout = () => {
   const createOrder = async (data) => {
     try {
       console.clear();
-      const reqOrder = await fetch("/api/ordenes", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const reqOrder = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/ordenes`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
         },
-        body: JSON.stringify(data),
-      });
+      );
       const resOrder = await reqOrder.json();
       if (!reqOrder.ok) {
         throw new Error(resOrder.error || "Error en el servidor");

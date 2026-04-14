@@ -26,10 +26,13 @@ const ProductImage = ({ id, url }) => {
       formData.append("fileId", id);
       formData.append("file", inputEdit?.[0]);
       formData.append("type", "product");
-      const reqFile = await fetch(`/api/archivos/`, {
-        method: "PUT",
-        body: formData,
-      });
+      const reqFile = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/archivos/`,
+        {
+          method: "PUT",
+          body: formData,
+        },
+      );
       const fileData = await reqFile.json();
       if (!reqFile.ok) {
         throw new Error(fileData.error || "Error en la carga de la imagen");
@@ -42,13 +45,16 @@ const ProductImage = ({ id, url }) => {
   };
   const remove = async (data) => {
     try {
-      const reqFile = await fetch(`/api/archivos/`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
+      const reqFile = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/archivos/`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
         },
-        body: JSON.stringify(data),
-      });
+      );
       const fileData = await reqFile.json();
       if (!reqFile.ok) {
         throw new Error(fileData.error || "Error en la carga de la imagen");
@@ -74,7 +80,7 @@ const ProductImage = ({ id, url }) => {
     <Fragment>
       <li className={styles.ImageItem}>
         <picture className={styles.Picture}>
-          <img src={`/assets/${url}`} alt="" />
+          <img src={`${import.meta.env.VITE_BACKEND_PUBLIC}/${url}`} alt="" />
         </picture>
         <form
           className={styles.FormImageEdit}

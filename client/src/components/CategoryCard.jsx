@@ -16,16 +16,19 @@ const CategoryCard = ({ category }) => {
     console.log("Datos del formulario:", data, fileInput);
     if (!fileInput?.[0]) {
       try {
-        const req = await fetch("/api/categorias/", {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
+        const req = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/categorias/`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              id: category.id,
+              name: data.name,
+            }),
           },
-          body: JSON.stringify({
-            id: category.id,
-            name: data.name,
-          }),
-        });
+        );
         const updatedCategory = await req.json();
         console.log("Categoría actualizada:", updatedCategory);
         setEdit(false);
@@ -40,22 +43,28 @@ const CategoryCard = ({ category }) => {
         formData.append("name", data.name);
         formData.append("icon", fileInput?.[0]);
         formData.append("type", "category");
-        const reqFile = await fetch("/api/archivos/", {
-          method: "POST",
-          body: formData,
-        });
-        const fileData = await reqFile.json();
-        const req = await fetch("/api/categorias/", {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
+        const reqFile = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/archivos/`,
+          {
+            method: "POST",
+            body: formData,
           },
-          body: JSON.stringify({
-            id: category.id,
-            name: data.name,
-            iconId: fileData.id,
-          }),
-        });
+        );
+        const fileData = await reqFile.json();
+        const req = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/categorias/`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              id: category.id,
+              name: data.name,
+              iconId: fileData.id,
+            }),
+          },
+        );
         const updatedCategory = await req.json();
         console.log("Categoría actualizada:", updatedCategory);
         setEdit(false);
@@ -70,22 +79,28 @@ const CategoryCard = ({ category }) => {
         formData.append("fileId", category.iconId);
         formData.append("icon", fileInput?.[0]);
         formData.append("type", "category");
-        const reqFile = await fetch(`/api/archivos/`, {
-          method: "PUT",
-          body: formData,
-        });
-        const fileData = await reqFile.json();
-        const req = await fetch("/api/categorias/", {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
+        const reqFile = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/archivos/`,
+          {
+            method: "PUT",
+            body: formData,
           },
-          body: JSON.stringify({
-            id: category.id,
-            name: data.name,
-            iconId: category.iconId,
-          }),
-        });
+        );
+        const fileData = await reqFile.json();
+        const req = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/categorias/`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              id: category.id,
+              name: data.name,
+              iconId: category.iconId,
+            }),
+          },
+        );
         const updatedCategory = await req.json();
         console.log("Categoría actualizada:", updatedCategory);
         setEdit(false);
@@ -101,7 +116,7 @@ const CategoryCard = ({ category }) => {
           {category?.iconId && (
             <picture className={styles.ImgCategory}>
               <img
-                src={`/assets/${category?.icon?.url}`}
+                src={`${import.meta.env.VITE_BACKEND_PUBLIC}/${category?.icon?.url}`}
                 alt={`${category.name} icon`}
               />
             </picture>

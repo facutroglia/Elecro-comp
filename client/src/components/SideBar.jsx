@@ -9,13 +9,16 @@ const SideBar = () => {
   useEffect(() => {
     const getUser = async (userId) => {
       try {
-        const response = await fetch("/api/usuarios/perfil", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
+        const response = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/usuarios/perfil`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ id: userId }),
           },
-          body: JSON.stringify({ id: userId }),
-        });
+        );
 
         const data = await response.json();
         if (!response.ok) throw new Error("Error al traer al usuario");

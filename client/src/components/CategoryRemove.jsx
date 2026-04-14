@@ -10,25 +10,31 @@ const CategoryRemove = ({ category }) => {
   const remove = async (data) => {
     try {
       if (category.iconId) {
-        const reqFile = await fetch("/api/archivos", {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
+        const reqFile = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/archivos`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ id: category.iconId }),
           },
-          body: JSON.stringify({ id: category.iconId }),
-        });
+        );
         const resFile = await reqFile.json();
         if (!reqFile.ok) {
           throw new Error(resFile.error || "Failed to fetch files");
         }
       }
-      const req = await fetch("/api/categorias/", {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
+      const req = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/categorias/`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id: category.id }),
         },
-        body: JSON.stringify({ id: category.id }),
-      });
+      );
       const res = await req.json();
       if (!req.ok) {
         throw new Error(res.error || "Failed to remove category");

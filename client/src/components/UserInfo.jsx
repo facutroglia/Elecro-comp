@@ -17,13 +17,16 @@ const UserInfo = ({ user }) => {
   const navigate = useNavigate();
   const update = async (data) => {
     try {
-      const reqAvatar = await fetch("/api/usuarios/actualizar", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
+      const reqAvatar = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/usuarios/actualizar`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id: user.id, ...data }),
         },
-        body: JSON.stringify({ id: user.id, ...data }),
-      });
+      );
       const avatarData = await reqAvatar.json();
       if (!reqAvatar.ok) {
         throw new Error(avatarData.error || "Error en la carga del avatar");

@@ -31,20 +31,23 @@ const ProductDataEdit = ({ name, category, brand, price, description, id }) => {
   const editData = async (data) => {
     const { name, description, price, categoryId, brandId } = data;
     try {
-      const reqProduct = await fetch("/api/productos", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
+      const reqProduct = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/productos`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id,
+            name,
+            description,
+            price,
+            categoryId,
+            brandId,
+          }),
         },
-        body: JSON.stringify({
-          id,
-          name,
-          description,
-          price,
-          categoryId,
-          brandId,
-        }),
-      });
+      );
       const resProduct = await reqProduct.json();
       if (!reqProduct.ok) {
         throw new Error(resProduct.error || "Error al crear el producto");
@@ -57,12 +60,12 @@ const ProductDataEdit = ({ name, category, brand, price, description, id }) => {
   };
   useEffect(() => {
     const getCategories = async () => {
-      const res = await fetch("/api/categorias");
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/categorias`);
       const data = await res.json();
       setCategories(data);
     };
     const getBrands = async () => {
-      const res = await fetch("/api/marcas");
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/marcas`);
       const data = await res.json();
       setBrands(data);
     };

@@ -15,7 +15,7 @@ const BrandEdit = ({ brand, update }) => {
     console.log("Datos del formulario:", data, fileInput);
     if (!fileInput?.[0]) {
       try {
-        const req = await fetch("/api/marcas/", {
+        const req = await fetch(`${import.meta.env.VITE_BACKEND_URL}/marcas/`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -38,12 +38,15 @@ const BrandEdit = ({ brand, update }) => {
         formData.append("name", data.name);
         formData.append("icon", fileInput?.[0]);
         formData.append("type", "brand");
-        const reqFile = await fetch("/api/archivos/", {
-          method: "POST",
-          body: formData,
-        });
+        const reqFile = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/archivos/`,
+          {
+            method: "POST",
+            body: formData,
+          },
+        );
         const fileData = await reqFile.json();
-        const req = await fetch("/api/marcas/", {
+        const req = await fetch(`${import.meta.env.VITE_BACKEND_URL}/marcas/`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -67,12 +70,15 @@ const BrandEdit = ({ brand, update }) => {
         formData.append("fileId", brand.logoId);
         formData.append("icon", fileInput?.[0]);
         formData.append("type", "brand");
-        const reqFile = await fetch(`/api/archivos/`, {
-          method: "PUT",
-          body: formData,
-        });
+        const reqFile = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/archivos/`,
+          {
+            method: "PUT",
+            body: formData,
+          },
+        );
         const fileData = await reqFile.json();
-        const req = await fetch("/api/marcas/", {
+        const req = await fetch(`${import.meta.env.VITE_BACKEND_URL}/marcas/`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",

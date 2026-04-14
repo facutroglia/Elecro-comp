@@ -14,7 +14,7 @@ const BrandAdd = () => {
   const createBrand = async (data) => {
     if (!fileInput?.[0]) {
       try {
-        const req = await fetch("/api/marcas/", {
+        const req = await fetch(`${import.meta.env.VITE_BACKEND_URL}/marcas/`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -36,13 +36,16 @@ const BrandAdd = () => {
         formData.append("name", data.name);
         formData.append("icon", fileInput?.[0]);
         formData.append("type", "brand");
-        const reqFile = await fetch("/api/archivos/", {
-          method: "POST",
-          body: formData,
-        });
+        const reqFile = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/archivos/`,
+          {
+            method: "POST",
+            body: formData,
+          },
+        );
         const fileData = await reqFile.json();
         console.log("Archivo subido:", fileData);
-        const req = await fetch("/api/marcas/", {
+        const req = await fetch(`${import.meta.env.VITE_BACKEND_URL}/marcas/`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

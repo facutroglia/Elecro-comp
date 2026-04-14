@@ -13,7 +13,7 @@ const BrandCard = ({ brand }) => {
           {brand?.logo && (
             <picture className={styles.ImgBrand}>
               <img
-                src={`/assets/${brand?.logo?.url}`}
+                src={`${import.meta.env.VITE_BACKEND_PUBLIC}/${brand?.logo?.url}`}
                 alt={`${brand.name} icon`}
               />
             </picture>

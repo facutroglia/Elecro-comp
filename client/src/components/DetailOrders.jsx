@@ -49,7 +49,9 @@ function DetailOrders({ onClose, order }) {
           <ul className={styles.ProductList}>
             {order.items.map((item) => (
               <li key={item.id}>
-                <img src={`/assets/${item?.product?.gallery?.[0].url}`} />
+                <img
+                  src={`${import.meta.env.VITE_BACKEND_PUBLIC}/${item?.product?.gallery?.[0].url}`}
+                />
                 <p>{item.product.name}</p>
                 <p>
                   {formatPrice(item.price)} x {`(${item.quantity})`}

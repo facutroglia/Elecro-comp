@@ -26,7 +26,9 @@ function OrderedProducts({ onOpen, setCurrent, orders }) {
             <ul className={styles.UlProducts}>
               {order.items.slice(0, 3).map((item) => (
                 <li className={styles.LiProducts}>
-                  <img src={`/assets/${item?.product?.gallery?.[0].url}`} />
+                  <img
+                    src={`${import.meta.env.VITE_BACKEND_PUBLIC}/${item?.product?.gallery?.[0].url}`}
+                  />
                   <p>{item.product.name}</p>
                   <p>
                     {formatPrice(item.price)} x {`(${item.quantity})`}
