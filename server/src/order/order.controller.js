@@ -150,6 +150,10 @@ export const deleteOrder = async (req, res) => {
   try {
     const { id } = req.body;
 
+    await prisma.item.deleteMany({
+      where: { orderId: id },
+    });
+
     await prisma.order.delete({
       where: { id },
     });

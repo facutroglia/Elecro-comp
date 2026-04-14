@@ -110,7 +110,7 @@
 #categories {
   position: fixed;
   top: 17dvh;
-  left: 0;
+
   background-color: var(--primary);
   display: flex;
   flex-direction: column;

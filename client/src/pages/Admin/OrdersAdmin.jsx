@@ -1,15 +1,46 @@
-import React, { useState } from "react";
-import { useLoaderData } from "react-router";
+import { Fragment, useState, useEffect } from "react";
+import { useLoaderData, useNavigate } from "react-router";
+import { useForm } from "react-hook-form";
 import Template from "../../components/Template";
 import styles from "../../styles/pages/AdminOrders.module.css";
 import { Icon } from "@iconify/react";
-
+import formatPrice from "../../utils/formatPrice.js";
 const AdminOrders = () => {
   const { pedidos } = useLoaderData();
+  const navigate = useNavigate();
   const [pedidoSeleccionado, setPedidoSeleccionado] = useState(null);
+  const [confirm, setConfirm] = useState(null);
+  const [alert, setAlert] = useState(false);
+  const removeForm = useForm({ defaultValues: { id: null } });
   const getTotal = (items) => {
     return items.reduce((acc, item) => acc + item.price * item.quantity, 0);
   };
+
+  const remove = async (data) => {
+    try {
+      const req = await fetch("/api/ordenes", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const res = await req.json();
+      if (!req.ok) {
+        throw new Error(res.error ?? "No se reconocio la orden de compra");
+      }
+      navigate(0);
+    } catch (error) {
+      removeForm.setError("root", error.message ?? "No se pudo eliminar");
+    }
+  };
+
+  useEffect(() => {
+    if (confirm) {
+      removeForm.setValue("id", confirm.id);
+    }
+  }, [confirm]);
+
   return (
     <Template title={"Panel | Gestión de Pedidos"}>
       <div className={styles.OrdersContainer}>
@@ -22,7 +53,6 @@ const AdminOrders = () => {
                 <th>Fecha</th>
                 <th>Total</th>
                 <th>Detalle</th>
-                <th>Editar</th>
                 <th>Eliminar</th>
               </tr>
             </thead>
@@ -36,25 +66,23 @@ const AdminOrders = () => {
                       ? new Date(pedido.date).toLocaleDateString()
                       : "Sin fecha"}
                   </td>
-                  <td>${getTotal(pedido.items)}</td>
+                  <td>{formatPrice(getTotal(pedido.items))}</td>
                   <td>
                     <button
                       type="button"
                       onClick={() => setPedidoSeleccionado(pedido)}
                       className={styles.BtnOrders}
                     >
-                      Ver detalle
-                    </button>
-                  </td>
-                  <td>
-                    <button type="button" className={styles.BtnOrders}>
-                      Editar
+                      <Icon icon="mdi:eye" />
                     </button>
                   </td>
                   <td>
                     <button
                       type="button"
-                      onClick={() => handleDelete(pedido.id)}
+                      onClick={() => {
+                        setAlert(true);
+                        setConfirm(pedido);
+                      }}
                       className={styles.BtnDeleteOrder}
                     >
                       <Icon icon="mdi:trash" />
@@ -69,6 +97,54 @@ const AdminOrders = () => {
             No hay pedidos registrados actualmente.
           </p>
         )}
+
+        {alert && confirm && (
+          <div
+            className={styles.ModalOverlay}
+            onClick={() => {
+              setAlert(false);
+              setConfirm(null);
+            }}
+          >
+            <section
+              className={`${styles.ModalContent} ${styles.Alert}`}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <p>
+                Estas seguro que deseas eleminar esta orden de compra? #
+                {confirm.id.split("-")[0]}
+              </p>
+              <form onSubmit={removeForm.handleSubmit(remove)}>
+                <button
+                  type="submit"
+                  disabled={removeForm.formState.isSubmitting}
+                >
+                  {removeForm.formState.isSubmitting ? (
+                    <>
+                      <Icon icon="line-md:loading-loop" />
+                    </>
+                  ) : (
+                    <>
+                      <Icon icon="mdi:check" />
+                      Si
+                    </>
+                  )}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setAlert(false);
+                    setConfirm(null);
+                  }}
+                >
+                  <Icon icon="mdi:close" />
+                  No
+                </button>
+              </form>
+            </section>
+          </div>
+        )}
+
         {pedidoSeleccionado && (
           <div
             className={styles.ModalOverlay}
@@ -86,7 +162,7 @@ const AdminOrders = () => {
                   className={styles.BtnCloseDetail}
                   onClick={() => setPedidoSeleccionado(null)}
                 >
-                  &times;
+                  <Icon icon="mdi:close" />
                 </button>
               </header>
 
@@ -111,11 +187,9 @@ const AdminOrders = () => {
                   {pedidoSeleccionado.items.map((item) => (
                     <li key={item.id} className={styles.ProductItem}>
                       <span>
-                        {item.product.name} (x{item.quantity})
+                        {item.product.name} {`(x${item.quantity})`}
                       </span>
-                      <span>
-                        ${(item.price * item.quantity).toLocaleString()}
-                      </span>
+                      <span>{formatPrice(item.price * item.quantity)}</span>
                     </li>
                   ))}
                 </ul>
@@ -123,7 +197,7 @@ const AdminOrders = () => {
                 <div className={styles.ModalTotal}>
                   <strong>Total Final:</strong>
                   <strong>
-                    ${getTotal(pedidoSeleccionado.items).toLocaleString()}
+                    {formatPrice(getTotal(pedidoSeleccionado.items))}
                   </strong>
                 </div>
               </main>

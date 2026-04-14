@@ -60,9 +60,9 @@
 .BtnDeleteOrder {
   color: var(--white);
   background-color: var(--error);
-  font-size: 2rem;
-  padding: 0.2rem 0.4rem;
-  border-radius: 12px;
+  font-size: 1.5rem;
+  padding: 0.1rem 0.2rem;
+  border-radius: 8px;
   cursor: pointer;
   border: solid 1px transparent;
 }
@@ -103,6 +103,49 @@
   border: 1px solid var(--gray-02);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   animation: fadeIn 0.3s ease;
+}
+.Alert {
+  background-color: var(--white-02);
+  width: 90%;
+  max-width: 500px;
+  border-radius: 8px;
+  padding: 2rem;
+  border: 1px solid var(--gray-02);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.3s ease;
+  color: var(--error);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  & form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+    & button {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      &:disabled {
+        cursor: none;
+        pointer-events: none;
+        background-color: transparent;
+      }
+      &:first-child {
+        color: var(--success);
+      }
+      &:last-child {
+        color: var(--error);
+      }
+    }
+  }
 }
 
 .ModalHeader {
