@@ -10,12 +10,12 @@ export default defineConfig(({ mode }) => {
     server: {
       proxy: {
         "/api": {
-          target: env.VITE_BACKEND_URL || "http://localhost:3000/api",
+          target: env.VITE_BACKEND_URL,
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, ""),
         },
         "/assets": {
-          target: env.VITE_BACKEND_PUBLIC || "http://localhost:3000/public/",
+          target: env.VITE_BACKEND_PUBLIC,
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/assets/, ""),
         },
